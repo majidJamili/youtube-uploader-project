@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        body{
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+    <title>Edit Videos</title>
+
+</head>
+<body>
+    <h2></strong>Edit: </strong><%=video.title%></h2>
+
+    <div class="container">        
+        <form action="/videos/<%=video._id%>?_method=PUT" method="POST">
+            <label for="title"><strong>Edit Title</strong></label>
+            <br>
+            <input type="text" name="video[title]" id="title" placeholder="Type down your video title..." value="<%=video.title%>">
+            <br>
+            <br>  
+            
+            <label for="description"><strong> Edit Description</strong></label>
+            <br>
+            <textarea name="video[description]" id="description" cols="30" rows="20" placeholder="Video Description"><%=video.description %> </textarea>
+            <br>
+            <br>
+            <button>
+                <strong> Edit</strong>
+            </button>
+        </form>
+        <a href="/"><Strong>Home</Strong></a>
+
+    </div>
+    
+</body>
+</html>

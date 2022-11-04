@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        body{
+            font-family: 'Roboto', sans-serif;
+        }
+        .video-container{
+            border: 1px solid black;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+    <title>Show Video</title>
+
+</head>
+<body>
+    <div class="video-container">
+        <h3 style="color: green;"><%= videoFound.title%></h3>
+        <iframe
+                src="<%=videoFound.youtube_video_url%>"
+                frameborder="0"
+                width="450px"
+                height="300px"                
+                allowfullscreen>
+        </iframe>
+        <P><%=videoFound.description%></P>          
+    </div>
+    <form action="/videos/<%=videoFound._id%>?_method=DELETE" method="POST">
+        <button><strong>Delete Video</strong></button>
+
+    </form>
+    <a href="/videoindex"><strong> Show All Videos</strong></a>
+    <br>
+    <a href="/video/<%=videoFound._id%>/edit">Edit</a>
+    <br>
+    <a href="/"> <strong>Home</strong></a>    
+</body>
+</html>
