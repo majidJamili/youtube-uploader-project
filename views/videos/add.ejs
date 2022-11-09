@@ -15,11 +15,15 @@
 <body>
     <div class="container">
         <h1>Upload a New Video</h1>
-        <form action="/uploadvideo" method="POST">
+        <a href="<%=url%> " class="button">Upload Youtube Video</a>
+        <form action="/uploadvideo" method="POST" enctype="multipart/form-data">
             <label for="title"><strong>Title</strong></label>
             <br>
             <input type="text" name="video[title]" id="title" placeholder="Type down your video title..." required>
             <br>
+            <br>
+            <label for="video"></label>
+            <input type="file" name="video[video]" id="video">
             <br>
             <label for="url"><strong>Url</strong></label>
             <br>
