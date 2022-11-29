@@ -1,56 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Info</title>
-</head>
+    <title>Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <style>
+      body {
+        padding-top: 80px;
+        word-wrap: break-word;
+      }
 
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/public/styles/userinfo-style.css">
+      .bootstrap-tagsinput {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        display: inline-block;
+        padding: 4px 6px;
+        color: #555;
+        vertical-align: middle;
+        border-radius: 4px;
+        max-width: 100%;
+        line-height: 22px;
+        cursor: text;
+      }
 
+      .bootstrap-tagsinput input {
+        border: none;
+        box-shadow: none;
+        outline: none;
+        background-color: transparent;
+        padding: 0 6px;
+        margin: 0;
+        width: auto;
+        max-width: inherit;
+      }
 
+      .bootstrap-tagsinput.form-control input::-moz-placeholder {
+        color: #777;
+        opacity: 1;
+      }
 
-<body>
-  <h1>User Information</h1>
-  <ul>
-    <li>
-      <h4>Name: <%=name%> </h4>
-    </li>
+      .bootstrap-tagsinput.form-control input:-ms-input-placeholder {
+        color: #777;
+      }
 
-    <img src="<%=pic%>" width="100" height="100" alt="" />
+      .bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
+        color: #777;
+      }
 
-  </ul>
-  <br>
+      .bootstrap-tagsinput input:focus {
+        border: none;
+        box-shadow: none;
+      }
 
-  <form action="/upload" method="POST" enctype="multipart/form-data">
-    <div class="form-group">
-      <div class="form-group">
-        <input type="text" name="video[title]" placeholder="Title" required class="form-control">
+      .bootstrap-tagsinput .tag {
+        margin-right: 2px;
+        color: white;
+      }
+
+      .bootstrap-tagsinput .tag [data-role="remove"] {
+        margin-left: 8px;
+        cursor: pointer;
+      }
+
+      .bootstrap-tagsinput .tag [data-role="remove"]:after {
+        content: "x";
+        padding: 0px 2px;
+      }
+
+      .bootstrap-tagsinput .tag [data-role="remove"]:hover {
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      .bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+      }
+      </style>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
       </div>
-      <div class="form-group">
-        <textarea name="video[description]" class="form-control" cols="30" rows="10" placeholder="description"></textarea>
-      </div>
-      <div class="form-group">
-        <input id="tags-input" type="text" class="form-control" name="video[tags]" data-role="tagsinput" placeholder="tags" />
-      </div>
-      <div class="form-group">
-        <input type="file" class="form-control" name="file" required id="" />
-      </div>
-    </div>
-    <div class="form-group">
-      <button class="btn btn-block btn-danger">
-        Upload Video
-      </button>
-    </div>
-  </form>
 
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+      <div class="row">
+        <!-- GOOGLE INFORMATION -->
+        <div class="col-sm-6">
+          <div class="well">
+            <h3 class="text-danger">
+              <span class="fa fa-youtube"></span> Youtube Channel
+            </h3>
+
+            <p>
+              <strong>name</strong>: <%= name %>
+              <br />
+              <strong>pic:</strong>:
+              <img src="<%=pic%>" width="200" height="200" alt="" />
+            </p>
+            </div>
+            </div>
+
+        <div class="col-sm-6">
+          <div class="well">
+            <h3 class="text-danger">
+              <span class="fa fa-youtube"></span> Upload Video to Youtube
+            </h3>
+
+            <% if (success) { %>
+            <div class="alert alert-success alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+              <strong>Success!</strong> Your Video is Uploaded to Youtube.
+            </div>
+            <%}%>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+              <div class="form-group">
+                <div class="form-group">
+                    <input type="text" name="title" placeholder="Title" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                    <textarea name="description" class="form-control" cols="30" rows="10" placeholder="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                    <input id="tags-input" type="text" class="form-control" name="tags" data-role="tagsinput" placeholder="tags" />
+                    </div>
+                    <div class="form-group">
+                      <input type="file" class="form-control" name="file" required id="" />
+                    </div>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-block btn-danger">
+                        Upload Video
+                      </button>
+                    </div>
+                    </form>
+                    <form action="/createplaylist" method="POST">
+                      <button type="submit">Create a Playlist called TEST</button>
+                    </form>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </body>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="/scripts/tags-script.js"></script>
 
 </html>

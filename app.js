@@ -5,24 +5,32 @@ if (process.env.NODE_ENV !== "production") {
 //Google Side of things:
 
 
-const express = require('express'); 
+const express = require('express');
+
 const app = express(); 
 const path = require('path'); 
-const mongoose = require('mongoose'); 
+
+const mongoose = require('mongoose');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
 const multer = require('multer');
-
 const fs = require('fs');
+const session = require('express-session'); 
 
 //Get Database data:
 const Video = require('./models/videos'); 
+const Task = require('./models/tasks');
+
 
 //Google Authentication Requirements: 
 const { google } = require('googleapis');
 const OAuth2Data = require('./credentials.json');
-const { response } = require('express');
-const { title } = require('process');
-const { render } = require('ejs');
+var title, description;
+var tags = [];
+var isAuthenticated = false;
+var authed = false;
+const { getDuration } = require('./side-functions');
 
 
 
@@ -36,12 +44,14 @@ mongoose.connect('mongodb://localhost:27017/youtubeUploader',{ useNewUrlParser: 
         console.log(err)
     }); 
 
+
+
 //Set Views:
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
     
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 
 //Video Uploading part:
@@ -73,56 +83,206 @@ var upload = multer({
 }).single("file")
 
 
+app.use(session({
+    secret: 'somethingsecretgoeshere',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}));
 
-//Initialisation:
-
+app.set('view engine', 'ejs');
 var isAuthenticated = false;
-const SCOPES ="https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/userinfo.profile";
 
-//Routes:
-app.get('/',(req,res)=>{
-    if(!isAuthenticated){
+const SCOPES =
+    "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube";
+
+
+
+/////////////////////////////////////////////////////////////////////////  
+
+
+
+
+
+
+app.set("view engine", "ejs");
+
+var Storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, "./videos");
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    },
+});
+
+
+
+var upload = multer({
+    storage: Storage,
+}).single("file"); //Field name and max count
+
+
+
+// app.get('/google/callback', (req, res) => {
+//     const code = req.query.code;
+//     if(code){
+//         oAuth2Client.getToken(code, function(err, tokens){
+//             if(err){
+//                 console.log("Error during Authentiacation"); 
+//                 console.log(tokens); 
+//             }else{
+//                 console.log("Successful Authentiacation"); 
+//                 //console.log(tokens); 
+//                 oAuth2Client.setCredentials(tokens); 
+//                 isAuthenticated =true; 
+//                 res.redirect("/");
+//             }
+//         });
+//     }
+// });
+
+
+
+
+app.get("/", (req, res) => {
+    if (!authed) {
+        // Generate an OAuth URL and redirect there
         var url = oAuth2Client.generateAuthUrl({
-            access_type:"offline",
-            scope:SCOPES
-        })
-        //console.log(url)
-        res.render('home.ejs',{url:url})
-    }else{
-        var oauth2 = google.oauth2({
-            auth:oAuth2Client,
-            version:"v2"
+            access_type: "offline",
+            scope: SCOPES,
         });
-        oauth2.userinfo.get(function(err,response){
+        //console.log(url);
+        res.render("home", { url: url });
+    } else {
+        var oauth2 = google.oauth2({
+            auth: oAuth2Client,
+            version: "v2",
+        });
+        oauth2.userinfo.get(function (err, response) {
             if (err) {
-                console.log(err);                
-            }else{
+                console.log(err);
+            } else {
                 //console.log(response.data);
-                userName = response.data.name;
-                pic = response.data.picture; 
-                res.render('users/userinfo.ejs',{
-                    name:response.data.name,
-                    pic:response.data.picture,
-                    success:false
+                name = response.data.name;
+                pic = response.data.picture;
+                res.render("users/userinfo.ejs", {
+                    name: response.data.name,
+                    pic: response.data.picture,
+                    success: false,
                 });
             }
         });
     }
 });
 
+app.post("/createplaylist", async (req, res) => {
+    const youtube = google.youtube({ version: "v3", auth: oAuth2Client });
+    youtube.playlists.insert({
+        part: 'id,snippet',
+        resource: {
+            snippet: {
+                title: "TEST PLAYLIST001",
+                description: "Description this is a test playlist",
+            }
+        },
+        function(err, data, res) {
+            if (err) {
+                console.log(err);
+                res.end("Something went wrong");
+            } else if (data) {
+                res.end(data);
+                console.log(data);
+            }
 
-app.get('/google/callback', (req, res) => {
+
+        }
+
+
+    })
+    res.redirect("/");
+
+
+
+})
+
+app.post("/upload", (req, res) => {
+    upload(req, res, function (err) {
+        if (err) {
+            console.log(err);
+            return res.end("Something went wrong");
+        } else {
+            //console.log(req.file.path);
+            title = req.body.title;
+            description = req.body.description;
+            tags = req.body.tags;
+
+            const youtube = google.youtube({ version: "v3", auth: oAuth2Client });
+            youtube.videos.insert(
+                {
+                    resource: {
+                        // Video title and description
+                        snippet: {
+                            title: title,
+                            description: description,
+                            tags: tags
+                        },
+                    // I don't want to spam my subscribers
+                        status: {
+                            privacyStatus: "public",
+                        },
+                    },
+                // This is for the callback function
+                    part: "snippet,status",
+
+                    // Create the readable stream to upload the video
+                    media: {
+                        body: fs.createReadStream(req.file.path)
+                    },
+                },
+                async (err, data) => {
+                    if(err) throw err
+                    const youtube_video_url = data.data.id;
+                    console.log('Youtube Video ID:');
+                    console.log(youtube_video_url);
+                    // const youtube_video_url = `https://www.youtube.com/embed/${youtube_Id}`;
+
+                    const { title, description, tags } = req.body;
+                    const tasks = [];
+
+                    const newVideo = new Video({
+                        title, youtube_video_url,
+                        tags, description, tasks
+                    })
+                    console.log(newVideo);
+                    await newVideo.save();
+                    fs.unlinkSync(req.file.path);
+                    res.render("users/userinfo.ejs", { name: name, pic: pic, success: true });
+                }
+            );
+        }
+    });
+});
+
+app.get("/logout", (req, res) => {
+    authed = false;
+    res.redirect("/");
+});
+
+app.get("/google/callback", function (req, res) {
     const code = req.query.code;
-    if(code){
-        oAuth2Client.getToken(code, function(err, tokens){
-            if(err){
-                console.log("Error during Authentiacation"); 
-                console.log(tokens); 
-            }else{
-                console.log("Successful Authentiacation"); 
-                //console.log(tokens); 
-                oAuth2Client.setCredentials(tokens); 
-                isAuthenticated =true; 
+    if (code) {
+        // Get an access token based on our OAuth code
+        oAuth2Client.getToken(code, function (err, tokens) {
+            if (err) {
+                console.log("Error authenticating");
+                console.log(err);
+            } else {
+                console.log("Successfully authenticated");
+                //console.log(tokens);
+                oAuth2Client.setCredentials(tokens);
+
+                authed = true;
                 res.redirect("/");
             }
         });
@@ -130,103 +290,63 @@ app.get('/google/callback', (req, res) => {
 });
 
 
-app.post('/upload',(req,res)=>{
-    upload(req,res,function(err){
-        if (err) {
-            console.log(err);
-            return res.end('Something went wrong')            
-        }else{
-            const title = req.body.video.title;
-            const description = req.body.video.description;
-            const tags = req.body.video.tags; 
-            const youtube = google.youtube({
-                version:'v3',
-                auth:oAuth2Client
-            })
-            youtube.videos.insert(
-                {
-                    resource:{
-                        snippet: {
-                            title:title,
-                            description:description,
-                            tags:tags
-                        },
-                        status: {
-                            privacyStatus: "private",
-                          }
-                        },
-                        part: "snippet,status",
-                        media: {
-                            body: fs.createReadStream(req.file.path)
-                          },
-                },
-                (err,data)=>{
-                    if(err) throw err
-
-                    fs.unlinkSync(req.file.path);
-                    userName = response.data.name;
-                    pic = response.data.picture; 
-                    console.log(`video id: ${data.id}`); 
-                    res.render('users/userinfo.ejs',{
-                        name:response.data.name,
-                        pic:response.data.picture,
-                        success:false
-                    });
-                }
-            )
-
-        }
-    })
-})
 
 
-app.get('/uploadvideo', (req,res)=>{
-
-})
-
-app.post('/uploadvideo', async(req,res)=>{
-
-})
 
 
 app.get('/logout', (req, res) => {
-    isAuthenticated = false;
+    authed = false;
     res.redirect('/')
 
 })
 
 
 
-// app.get('/videos', async(req,res)=>{
-//     const videos = await Video.find({});
-//     res.render('videos/index.ejs',{videos});
-// })
-// app.get('/video/:id', async(req,res)=>{
-//     const {id} = req.params; 
-//     const videoFound = await Video.findById(id);
-//     res.render('videos/show',{videoFound});
-    
-// })
-// app.get('/video/:id/edit',async(req,res)=>{
-//     const {id} = req.params; 
-//     const video = await Video.findById(id);
-//     res.render('videos/edit.ejs',{video});    
-// })
+app.get('/videos', async (req, res) => {
+    const videos = await Video.find({});
+    res.render('videos/index.ejs', { videos });
+})
+app.get('/video/:id', async (req, res) => {
+    const { id } = req.params;
+    const videoFound = await Video.findById(id).populate('tasks');
+    res.render('videos/show', { videoFound });
 
-// app.put('/videos/:id',async(req,res)=>{
-//     const { id } = req.params; 
+})
+app.get('/video/:id/edit', async (req, res) => {
+    const { id } = req.params;
+    const video = await Video.findById(id);
+    res.render('videos/edit.ejs', { video });
+})
 
-//     const video = await Video.findByIdAndUpdate(id,req.body.video,
-//          { runValidators: false, new: true });
-//     res.redirect(`/video/${video._id}`);
-// })
+app.put('/videos/:id', async (req, res) => {
+    const { id } = req.params;
 
-// app.delete('/videos/:id',async(req,res)=>{
-//     const {id} = req.params; 
-//     const deletedVideo = await Video.findByIdAndDelete(id); 
-//     res.redirect('/videoindex'); 
+    const video = await Video.findByIdAndUpdate(id, req.body.video,
+        { runValidators: false, new: true });
+    res.redirect(`/video/${video._id}`);
+})
 
-// })
+app.delete('/videos/:id', async (req, res) => {
+    const { id } = req.params;
+    const deletedVideo = await Video.findByIdAndDelete(id);
+    res.redirect('/videos');
+})
+
+
+app.post('/video/:id/task/add', async (req, res) => {
+    const { id } = req.params;
+    const video = await Video.findById(id);
+    const { title, types, startTime, endTime } = req.body;
+    const time = getDuration(startTime, endTime);
+    const task = new Task({ title, types, time });
+    video.tasks.push(task);
+    task.video = video;
+    await task.save();
+    await video.save();
+    res.redirect(`/video/${video._id}`);
+
+})
+
 
 
 app.listen(3000, ()=>{

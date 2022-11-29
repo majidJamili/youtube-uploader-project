@@ -21,18 +21,18 @@
 <body>
     <h1>All Videos</h1>
     <a href="/">Home</a>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/NNgYId7b4j0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <!-- <iframe width="560" height="315" src=title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
 
     <% for (let video of videos){ %>
         <div class="video-container">
-            <h3><a href="video/<%=video._id%>"><%= video.title%></a> </h3>
+            <h3><a href="video/<%=video._id%>"><%= video.title%></a></h3>
             
             <iframe
-                    src="<%=video.youtube_video_url%>"
+            src='https://www.youtube.com/embed/<%=video.youtube_video_url %>'
                     frameborder="0"
-                    width="450px"
-                    height="300px"                
+                    width="600px"
+                    height="450px"
                     allowfullscreen>
             </iframe>
             <P><%=video.description%></P>          

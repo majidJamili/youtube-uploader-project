@@ -1,11 +1,11 @@
 const mongoose = require('mongoose'); 
+const Schema = mongoose.Schema; 
 
-
-const videosSchema = new mongoose.Schema({
+const videosSchema = new Schema({
     title: {
-        type:String,
+        type: String
     },
-    genre:{
+    tags: {
         type:String
     },
     youtube_video_url:{
@@ -13,7 +13,11 @@ const videosSchema = new mongoose.Schema({
     },
     description:{
         type:String
-    }
+    },
+    tasks: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Task'
+    }]
 })
 
 const Prodcut = mongoose.model('Video', videosSchema); 
