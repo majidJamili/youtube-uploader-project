@@ -5,79 +5,8 @@
     <title>Authentication</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-    <style>
-      body {
-        padding-top: 80px;
-        word-wrap: break-word;
-      }
-
-      .bootstrap-tagsinput {
-        background-color: #fff;
-        border: 1px solid #ccc;
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-        display: inline-block;
-        padding: 4px 6px;
-        color: #555;
-        vertical-align: middle;
-        border-radius: 4px;
-        max-width: 100%;
-        line-height: 22px;
-        cursor: text;
-      }
-
-      .bootstrap-tagsinput input {
-        border: none;
-        box-shadow: none;
-        outline: none;
-        background-color: transparent;
-        padding: 0 6px;
-        margin: 0;
-        width: auto;
-        max-width: inherit;
-      }
-
-      .bootstrap-tagsinput.form-control input::-moz-placeholder {
-        color: #777;
-        opacity: 1;
-      }
-
-      .bootstrap-tagsinput.form-control input:-ms-input-placeholder {
-        color: #777;
-      }
-
-      .bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
-        color: #777;
-      }
-
-      .bootstrap-tagsinput input:focus {
-        border: none;
-        box-shadow: none;
-      }
-
-      .bootstrap-tagsinput .tag {
-        margin-right: 2px;
-        color: white;
-      }
-
-      .bootstrap-tagsinput .tag [data-role="remove"] {
-        margin-left: 8px;
-        cursor: pointer;
-      }
-
-      .bootstrap-tagsinput .tag [data-role="remove"]:after {
-        content: "x";
-        padding: 0px 2px;
-      }
-
-      .bootstrap-tagsinput .tag [data-role="remove"]:hover {
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-      }
-
-      .bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
-      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-      }
-      </style>
-
+    <link rel="stylesheet" href="/styles/userinfo-style.css">
+   
   </head>
   <body>
     <div class="container">
@@ -131,20 +60,41 @@
                     </div>
                     </div>
                     <div class="form-group">
-                      <button class="btn btn-block btn-danger">
-                        Upload Video
-                      </button>
+                        <button class="btn btn-block btn-danger">
+                            Upload Video
+                        </button>
                     </div>
                     </form>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <a href="/hello"></a>
+                    <form action="/addtoplaylist" method="POST">
+                      <button type="submit">Add Video to Playlist</button>
+                    </form>
+
                     <form action="/createplaylist" method="POST">
                       <input class="form-control" type="text" id="title" name="title" required>
                       <button type="submit">Create Playlist</button>
                     </form>
+                    <form action="/editplaylist?_method=PUT" method="POST">
+                      <button type="submit">Update Playlist</button>
+                    </form>
+                    <form action="/deleteplaylist?_method=Delete" method="POST">
+                      <button type="submit">Delete Playlist</button>
+                    </form>
+                    <form action="/editvideo?_method=PUT" method="POST">
+                      <button type="submit">Update Video</button>
+                    </form>
+
+                    <form action="/deletevideos?_method=DELETE" method="POST">
+                      <button type="submit">Delete Video</button>
+                    </form>
+                    
+                    <form action="/deletevideos?_method=DELETE" method="POST">
+                      <button type="submit">Delete Video</button>
+                    </form>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+
                     </body>
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
