@@ -1,0 +1,36 @@
+<h3>Dashboard</h3>
+<h6> Hello {{name}} have a nice time!</h6>
+{{#if lines}}
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each lines}}
+        <tr>
+            <td><a href="/lines/{{_id}}">{{title}}</a></td>
+            <td>{{createdAt}}</td>
+            <td><span class="dash-status">{{status}}</span></td>
+            <td>
+                <a href="/lines/edit/{{_id}}" class="btn btn-float yellow darken-2">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form action="/lines/{{_id}}" method="POST" id="delete-form">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn red">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>You have no prodcution lines in your site yet</p>
+{{/if}}

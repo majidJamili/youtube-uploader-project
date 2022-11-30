@@ -21,13 +21,19 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
-
 const methodOverride = require('method-override')
 
 //Conncet to Database: 
 connectDB()
-app.use(express.static(path.join(__dirname, '/public')))
 
+app.engine('.hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', '.hbs');
+
+
+app.set('views', path.join(__dirname, '/views'));
+app.use(methodOverride('_method'));
+
+app.use(express.static(path.join(__dirname, '/public')))
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -37,8 +43,7 @@ app.use(express.json());
 
 
 //Set Views:
-app.set('view engine', 'ejs');
-
+// app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(methodOverride('_method'));
 
@@ -54,7 +59,6 @@ var Storage = multer.diskStorage({
     },
   });
 
-
 var upload = multer({
     storage:Storage,
 }).single("file")
@@ -63,10 +67,12 @@ var upload = multer({
 
 //Routes:
 app.use('/',require('./routes/index'));
+app.use('/videos', require('./routes/videos'));
+app.use('/playlists', require('./routes/playlists'));
+
 
 
 const PORT = process.env.PORT || 3000
-
 app.listen(PORT, () => {
     console.log("YOUTUBE PROJECT IS LISTENING ON PORT 3000");
 });
