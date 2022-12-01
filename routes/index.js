@@ -14,10 +14,10 @@ const SCOPES = ['https://www.googleapis.com/auth/youtube.upload',
     'https://www.googleapis.com/auth/youtube']
 
 
-// const url = [];
-// router.get('/', (req, res) => {
-//     res.render('login', { layout: 'login', url: url })
-// })
+
+
+
+
 router.get('/',(req,res)=>{
     if(!isAuthenticated){
         var url = oAuth2Client.generateAuthUrl({
@@ -36,6 +36,7 @@ router.get('/',(req,res)=>{
             }else{
                 userName = response.data.name;
                 pic = response.data.picture;
+                req.flash('success','You are sucessfully logged in...!');
                 res.render('studio/show', {
                     name:response.data.name,
                     pic:response.data.picture,

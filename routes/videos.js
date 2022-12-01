@@ -1,34 +1,49 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const oAuth2Client = require('../config/middlewares');
+const {upload} = require('../config/middlewares');
+const oAuth2Client= require('../config/middlewares');
+const fs = require('fs');
+const Video = require('../models/videos'); 
+
+
 const { google } = require('googleapis');
+const { nextTick } = require('process');
+const flash = require('flash');
+const youtube = google.youtube({ version: 'v3', auth: oAuth2Client})
+
+//Get upload form
+//GET /videos/upload
+router.get('/upload', (req,res)=>{
+
+    res.render('studio/add', {layout: 'main.hbs'}); 
+})
+
+
 
 //Upload a Video: 
 //POST: /videos/upload
-router.post('/upload', (req, res) => {
-    upload(req, res, function (err) {
-        if (err) {
-            console.log(err);
-            return res.end('Something went wrong')
-        } else {
+router.post('/upload', async(req, res) => {    
+
+
+    upload(req,res, function(err){
+        if(err){
+            console.log(err); 
+            return res.send('Something went wrong'); 
+        }else{
             const title = req.body.video.title;
-            const description = req.body.video.description;
-            const tags = req.body.video.tags;
-            const youtube = google.youtube({
-                version: 'v3',
-                auth: oAuth2Client
-            })
-            youtube.videos.insert(
-                {
+            const description = req.body.video.description; 
+            const tags = req.body.video.tags; 
+            const status = req.body.video.status; 
+            youtube.videos.insert({
                     resource: {
                         snippet: {
                             title: title,
-                            description: description,
+                            description: "description",
                             tags: tags
                         },
                         status: {
-                            privacyStatus: "private",
+                            privacyStatus: status,
                         }
                     },
                     part: "snippet,status",
@@ -36,20 +51,32 @@ router.post('/upload', (req, res) => {
                         body: fs.createReadStream(req.file.path)
                     },
                 },
-                function (err, data, res) {
+                async function  (err, data, res) {
                     if (err) {
                         console.log(err);
-                        res.end("Something went wrong");
+                        // res.render('error/404');
+                        next(); 
                     } else if (data) {
-                        res.end(data);
-                        console.log(data);
+                        try {
+                            await Video.create({'title':title, 'status': status, 'youtube_video_url': data.data.id, 'description':description, 'tasks':[] })
+                            res.redirect('/videos/upload')
+                            console.log('Video added to DB successfully')                                                       
+                        } catch (error) {      
+                            console.log(error)  
+                            res.render('error/404')                    
+                        }
                     }
                 }
             )
+             res.redirect('/videos/upload')
 
+            
         }
     })
-    res.redirect('/')
+
+
+
+
 })
 // Edit Videos: 
 // PUT: /videos/:id/edit

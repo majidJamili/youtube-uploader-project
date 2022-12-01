@@ -1,0 +1,54 @@
+<h3>Upload Video</h3>
+
+<div class="row">
+
+    <form action="/videos/upload" method="POST" class="col s12" enctype="multipart/form-data">
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="title" name="video[title]">
+                <label for="title">Title</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <select id="status" name="video[status]">
+                    <option value="private" selected>Private</option>
+                    <option value="public">Public</option>
+                </select>
+                <label for="status">Privacy Status</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <input id="tags-input" type="text" class="form-control" name="video[tags]" data-role="tagsinput" placeholder="tags" />
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <h5>Tell Us About this Video</h5>
+                <textarea id="body" name="video[description]"></textarea>
+            </div>
+        </div>
+                {{!-- <input type="file" class="form-control" name="file" required id="" /> --}}
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>Pick File</span>
+                <input type="file" name="file" required>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <button type="submit" class="btn red">upload</button>
+            <a href="/" class="btn orange">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="/scripts/tags-script.js"></script>
+

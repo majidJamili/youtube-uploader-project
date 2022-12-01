@@ -8,6 +8,9 @@ const videosSchema = new Schema({
     tags: {
         type:String
     },
+    status:{
+        type:String
+    },
     youtube_video_url:{
         type:String
     },
