@@ -24,22 +24,35 @@ const MongoStore = require('connect-mongo')
 const methodOverride = require('method-override')
 const flash = require('connect-flash');
 
+
 //Conncet to Database: 
 connectDB()
 
 app.engine('.hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', '.hbs');
 
-const sessionConfig = {
-  secret: 'thisshouldbeabettersecret!',
-  resave: false,
+// const sessionConfig = {
+//   secret: 'thisshouldbeabettersecret!',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { maxAge: 60000 }
+
+// }
+// app.use(flash());
+var sessionStore = new session.MemoryStore;
+
+
+app.use(cookieParser('secret'));
+app.use(session({
+  cookie: { maxAge: 60000 },
+  store: sessionStore,
   saveUninitialized: true,
-  cookie: {
-    httpOnly: true,
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-    maxAge: 1000 * 60 * 60 * 24 * 7
-  }
-}
+  resave: 'true',
+  secret: 'secret'
+}));
+app.use(flash());
+
+
 
 
 app.set('views', path.join(__dirname, '/views'));
@@ -47,13 +60,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, '/public')))
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(session(sessionConfig))
-app.use(flash());
-
-
-
-
-
+// app.use(session(sessionConfig))
 
 //Set Views:
 app.set('views', path.join(__dirname, '/views'));
@@ -75,6 +82,25 @@ var upload = multer({
     storage:Storage,
 }).single("file")
 
+app.use(function (req, res, next) {
+  // if there's a flash message in the session request, make it available in the response, then delete it
+  res.locals.sessionFlash = req.session.sessionFlash;
+  delete req.session.sessionFlash;
+  next();
+});
+
+app.all('/express-flash', function (req, res) {
+  req.flash('success', 'This is a flash message using the express-flash module.');
+  res.redirect(301, '/');
+});
+
+
+app.get('/', function (req, res) {
+  res.render('dashboard', { expressFlash: req.flash('success'), sessionFlash: res.locals.sessionFlash });
+});
+
+
+
 
 
 //Routes:
@@ -82,11 +108,11 @@ app.use('/',require('./routes/index'));
 app.use('/videos', require('./routes/videos'));
 app.use('/playlists', require('./routes/playlists'));
 
-app.use((req, res, next) => {
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
-  next();
-})
+// app.use((req, res, next) => {
+//   res.locals.success = req.flash('success');
+//   res.locals.error = req.flash('error');
+//   next();
+// })
 
 
 const PORT = process.env.PORT || 3000
