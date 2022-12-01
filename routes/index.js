@@ -39,8 +39,7 @@ router.get('/',(req,res)=>{
                 req.flash('success','You are sucessfully logged in...!');
                 res.render('studio/show', {
                     name:response.data.name,
-                    pic:response.data.picture,
-                    success:false
+                    pic: response.data.picture
                 });
             }
         });

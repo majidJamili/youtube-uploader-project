@@ -4,7 +4,7 @@ const express = require('express');
 
 const app = express(); 
 const multer = require('multer');
-
+const fs = require('fs');
 const ejs = require('ejs');
 
 //Google Authentication Requirements: 
@@ -22,23 +22,44 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const methodOverride = require('method-override')
-const flash = require('connect-flash'); 
-
-
-
+const flash = require('connect-flash');
 
 //Conncet to Database: 
 connectDB()
 
-
-//Global Middlewares: 
-app.set('views', path.join(__dirname, '/views'))
-app.use(methodOverride('_method'))
-app.use(express.static(path.join(__dirname, '/public')))
 app.engine('.hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
-app.set('view engine', '.hbs')
-app.use(express.urlencoded({ extended: true }))
+app.set('view engine', '.hbs');
+
+const sessionConfig = {
+  secret: 'thisshouldbeabettersecret!',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  }
+}
+
+
+app.set('views', path.join(__dirname, '/views'));
 app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, '/public')))
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(session(sessionConfig))
+app.use(flash());
+
+
+
+
+
+
+//Set Views:
+app.set('views', path.join(__dirname, '/views'));
+app.use(methodOverride('_method'));
+
+
 
 //Multer Middleware: 
 var Storage = multer.diskStorage({
@@ -49,29 +70,11 @@ var Storage = multer.diskStorage({
       callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
     },
   });
-//Session
-const sessionConfig = {
-  secret: 'thisshouldbeabettersecret!',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 60000 }
-}
-app.use(session(sessionConfig))
-app.use(flash());
-app.use(morgan('dev')); 
-
 
 var upload = multer({
     storage:Storage,
 }).single("file")
 
-
-//Flash Middleware: 
-app.use((req, res, next) => {
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
-  next();
-})
 
 
 //Routes:
@@ -79,9 +82,12 @@ app.use('/',require('./routes/index'));
 app.use('/videos', require('./routes/videos'));
 app.use('/playlists', require('./routes/playlists'));
 
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-});
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+})
+
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

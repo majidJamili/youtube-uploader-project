@@ -1,0 +1,32 @@
+{{#if success}}
+<h1>{{success}}</h1>
+{{/if}}
+
+
+{{#each videos}}
+<div class="card">
+    <br>
+    <div class="card-image waves-effect waves-block waves-light center">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{youtube_video_url}}"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+    </div>
+    <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">
+            <p><a href="#">{{title}}</a></p>
+            <i class="material-icons  top right"><i class="fa-solid fa-arrow-up"></i></i>
+            <br>
+
+        </span>
+
+    </div>
+    <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">{{title}}
+            <i class="material-icons right"><i class="fa-solid fa-arrow-down"></i></i>
+        </span>
+        <p>{{description}}</p>
+    </div>
+</div>
+
+{{/each}}
