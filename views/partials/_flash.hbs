@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="/styles/popup-container-style.css">
+
+{{#if success}}
+  <div class="row">
+    <div class="col s12 m7 right" id="myFlashCard" >
+      <div class="card right" >
+        <div class="card-content green darken-1 center">
+               <p> {{{success}}}</p>
+              <button type="button" class="custom-btn" onclick="closeFlash()"> 
+                <i class="fa-regular fa-circle-xmark">
+                </i></button>       
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}
+{{#if error}}
+  <div class="row">
+    <div class="col s12 m7 right" id="myFlashCard" >
+      <div class="card right" >
+        <div class="card-content red darken-1 center">
+               <p> {{{error}}}</p>
+              <button type="button" class="custom-btn" onclick="closeFlash()"> 
+                <i class="fa-regular fa-circle-xmark">
+                </i></button>       
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}
+
+{{#if warning}}
+  <div class="row">
+    <div class="col s12 m7 right" id="myFlashCard" >
+      <div class="card right" >
+        <div class="card-content yellow darken-3 center">
+               <p> {{{warning}}}</p>
+              <button type="button" class="custom-btn" onclick="closeFlash()"> 
+                <i class="fa-regular fa-circle-xmark">
+                </i></button>       
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}
+
+
+
+
+<script>
+   function closeFlash() { document.getElementById("myFlashCard").style.display = "none"; } 
+</script>

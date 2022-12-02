@@ -31,27 +31,13 @@ connectDB()
 app.engine('.hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', '.hbs');
 
-// const sessionConfig = {
-//   secret: 'thisshouldbeabettersecret!',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { maxAge: 60000 }
 
-// }
-// app.use(flash());
-var sessionStore = new session.MemoryStore;
-
-
-app.use(cookieParser('secret'));
-app.use(session({
-  cookie: { maxAge: 60000 },
-  store: sessionStore,
-  saveUninitialized: true,
-  resave: 'true',
-  secret: 'secret'
-}));
+app.use(session({ secret: 'myflashmessagesession',
+                            resave:false, 
+                            saveUninitialized:true,
+                            cookie: { maxAge: 60000 }}
+                                           ));
 app.use(flash());
-
 
 
 
@@ -82,24 +68,12 @@ var upload = multer({
     storage:Storage,
 }).single("file")
 
-app.use(function (req, res, next) {
-  // if there's a flash message in the session request, make it available in the response, then delete it
-  res.locals.sessionFlash = req.session.sessionFlash;
-  delete req.session.sessionFlash;
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success') || null
+  res.locals.error = req.flash('error') || null
+  res.locals.warning = req.flash('warning') || null
   next();
-});
-
-app.all('/express-flash', function (req, res) {
-  req.flash('success', 'This is a flash message using the express-flash module.');
-  res.redirect(301, '/');
-});
-
-
-app.get('/', function (req, res) {
-  res.render('dashboard', { expressFlash: req.flash('success'), sessionFlash: res.locals.sessionFlash });
-});
-
-
+})
 
 
 
@@ -108,11 +82,6 @@ app.use('/',require('./routes/index'));
 app.use('/videos', require('./routes/videos'));
 app.use('/playlists', require('./routes/playlists'));
 
-// app.use((req, res, next) => {
-//   res.locals.success = req.flash('success');
-//   res.locals.error = req.flash('error');
-//   next();
-// })
 
 
 const PORT = process.env.PORT || 3000

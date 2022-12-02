@@ -15,6 +15,7 @@ const youtube = google.youtube({ version: 'v3', auth: oAuth2Client})
 //Get upload form
 //GET /videos/upload
 router.get('/upload', (req, res) => {
+    req.flash('warning', 'We are ready for uploading...')
     res.render('studio/add', {layout: 'main.hbs'}); 
 })
 
@@ -23,7 +24,6 @@ router.get('/upload', (req, res) => {
 
 router.get('/index', async (req, res) => {
     const videos = await Video.find().lean()
-    req.flash('success', 'List of your videos fully loaded')
     res.render('studio/index', { videos })
 })
 

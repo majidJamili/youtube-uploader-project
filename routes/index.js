@@ -36,7 +36,7 @@ router.get('/',(req,res)=>{
             }else{
                 userName = response.data.name;
                 pic = response.data.picture;
-                req.flash('success','You are sucessfully logged in...!');
+                req.flash('success','You are ready to upload a new vide... are you excited?!');
                 res.render('studio/show', {
                     name:response.data.name,
                     pic: response.data.picture
