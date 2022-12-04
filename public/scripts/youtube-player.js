@@ -56,9 +56,14 @@ function onYouTubePlayerAPIReady() {
 
 }
 
+
+
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
 function openForm() {
     document.getElementById("myForm").style.display = "block";
 }
+
+function closeFlash() { document.getElementById("myFlashCard").style.display = "none"; }
+function openFlash() { document.getElementById("myFlashCard").style.display = "block"; } 

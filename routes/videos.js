@@ -28,6 +28,19 @@ router.get('/index', async (req, res) => {
 })
 
 
+//Render all videos:
+// GET /videos/index
+
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+
+    const video = await Video.findById(id).lean()
+
+    res.render('studio/studio', { video })
+})
+
+
+
 
 
 
@@ -69,18 +82,16 @@ router.post('/upload', async(req, res) => {
                         // res.render('error/404');
                         next(); 
                     } else if (data) {
-                        try {
+
                             await Video.create({'title':title, 'status': status, 'youtube_video_url': data.data.id, 'description':description, 'tasks':[] })
-                            res.redirect('/videos/upload')
+                            //res.redirect('/videos/upload')
                             console.log('Video added to DB successfully')                                                       
-                        } catch (error) {      
-                            console.log(error)  
-                            res.render('error/404')                    
-                        }
+
                     }
                 }
             )
-             res.redirect('/videos/upload')
+            req.flash('success', 'Video Uploaded Successfully')
+            res.redirect('/videos/index')
 
             
         }

@@ -1,4 +1,8 @@
-.card {
+body {
+    background: white;
+}
+
+.custom-card {
     color: #f1f1f1;
     width: auto;
     height: 50px;
@@ -8,6 +12,28 @@
     right: 10px;
 }
 
+.custom-card-wide {
+    color: #f1f1f1;
+    width: 800px !important;
+    align-self: center !important;
+    top: 50%;
+    left: 50%;
+}
+
+.white-button {
+    color: aliceblue;
+    font-size: 32px;
+}
+
+.orange-button {
+    color: rgb(237, 225, 9);
+}
+
+
+.green-button {
+    color: rgb(31, 204, 8);
+    font-size: 32px;
+}
 
 .custom-btn{
     background-color: transparent;
@@ -17,4 +43,24 @@
     top: 5px;
     right: 5px;
     font-size: 28px;
-}
+    color: white;
+    
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 32px;
+            color: crimson;
+        }
+    
+        .collapsible-card {
+            display: none;
+            height: fit-content !important;
+        }
+    
+    
+    
+        .collapsible-card-2 {
+            display: none;
+            height: fit-content !important;
+        }
