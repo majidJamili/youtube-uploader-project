@@ -67,3 +67,6 @@ function openForm() {
 
 function closeFlash() { document.getElementById("myFlashCard").style.display = "none"; }
 function openFlash() { document.getElementById("myFlashCard").style.display = "block"; } 
+
+function closeFlashSec() { document.getElementById("myFlashCardSecond").style.display = "none"; }
+function openFlashSec() { document.getElementById("myFlashCardSecond").style.display = "block"; } 

@@ -104,35 +104,72 @@ router.post('/upload', async(req, res) => {
 // Edit Videos: 
 // PUT: /videos/:id/edit
 router.put('/:id/edit', async (req, res) => {
-    const youtube = google.youtube({ version: "v3", auth: oAuth2Client });
 
-    youtube.videos.update(
-        {
-            resource: {
-                kind: "youtube#video",
-                id: "PldGZ9jD5qA",
-                snippet: {
-                    title: "UPDATED TEST REV008",
-                    description: "Video Description is Updated for the fifth time...!",
-                    categoryId: "1"
-                },
-            },
-            part: "snippet",
+    try {
 
-
-        },
-        function (err, data, res) {
-            if (err) {
-                console.log(err);
-                res.end("Something went wrong");
-            } else if (data) {
-
-                console.log(data.data.id);
+            const id = req.params.id
+            const video = await  Video.findById(id).lean()
+            if(!video){
+                return res.render('error/404')
             }
-        }
 
-    )
-    res.redirect('/')
+            //Update Youtube DB via API 
+            const title = req.body.title;
+            const description = req.body.description; 
+            const tags = req.body.tags; 
+            const status = req.body.status; 
+            youtube.videos.update({
+
+                                resource: {
+                                    kind: "youtube#video",
+                                    id: video.youtube_video_url,
+                                    snippet: {
+                                        title: title,
+                                        description: "Video Description is Updated for the fifth time...!",
+                                        tags:tags,
+                                        categoryId: "1"
+                                    },
+                                    status: {
+                                        privacyStatus: status,
+                                    }
+                                },
+                                part: "snippet,status",
+
+
+                            },
+                            async function (err, data, res) {
+                                if (err) {
+                                    console.log(err);
+                                    //res.end("Something went wrong");
+                                } else if (data) {
+                                                // Update mongoDB: 
+                                const videoUpdated = await Video.findByIdAndUpdate(id,req.body, {        
+                                    new: true,
+                                    runValidators: true});
+
+                                console.log(data.data.id, 'is updated successfully');
+                           
+                                }
+                            }
+
+                        )
+                        req.flash('success', `${video.title} is successfully updated... !!!`)
+                        res.redirect('/videos/index')     
+
+
+
+   
+    } catch (error) {
+        console.error(error)
+
+        return res.render('error/500')
+        
+    }
+
+
+
+
+
 })
 //Delete Vides
 //DELETE /videos/:id/delete
