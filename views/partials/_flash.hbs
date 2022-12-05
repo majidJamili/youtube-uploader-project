@@ -1,47 +1,32 @@
 <link rel="stylesheet" href="/styles/popup-container-style.css">
 
+
 {{#if success}}
-  <div class="row">
-    <div class="col s12 m7 right" id="myFlashCard" >
-      <div class="card custom-card right">
-        <div class="card-content green darken-1 center">
-               <p> {{{success}}}</p>
-              <button type="button" class="custom-btn" onclick="closeFlash()"> 
-                <i class="fa-regular fa-circle-xmark">
-                </i></button>       
-        </div>
-      </div>
-    </div>
-  </div>
-{{/if}}
-{{#if error}}
-  <div class="row">
-    <div class="col s12 m7 right" id="myFlashCard" >
-      <div class="card right" >
-        <div class="card-content custom-card red darken-1 center">
-               <p> {{{error}}}</p>
-              <button type="button" class="custom-btn" onclick="closeFlash()"> 
-                <i class="fa-regular fa-circle-xmark">
-                </i></button>       
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> {{{success}}}.
+  <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 {{/if}}
 
+{{#if error}}
+<div class="alert alert-error alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> {{{error}}}.
+  <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{{/if}}
+
+
 {{#if warning}}
-  <div class="row">
-    <div class="col s12 m7 right" id="myFlashCard" >
-      <div class="card right" >
-        <div class="card-content custom-card yellow darken-3 center">
-               <p> {{{warning}}}</p>
-              <button type="button" class="custom-btn" onclick="closeFlash()"> 
-                <i class="fa-regular fa-circle-xmark">
-                </i></button>       
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> {{{warning}}}.
+  <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 {{/if}}
 
 

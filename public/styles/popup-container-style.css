@@ -76,6 +76,6 @@ body {
 .card{
     align-content: flex-start !important;
 }
-#myFlashCard{
-    z-index: 0;
+.special-row{
+    z-index: 100 !important;
 }

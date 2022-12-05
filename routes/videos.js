@@ -15,7 +15,6 @@ const youtube = google.youtube({ version: 'v3', auth: oAuth2Client})
 //Get upload form
 //GET /videos/upload
 router.get('/upload', (req, res) => {
-    req.flash('warning', 'We are ready for uploading...')
     res.render('studio/add', {layout: 'main.hbs'}); 
 })
 
