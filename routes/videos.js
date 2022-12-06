@@ -10,6 +10,7 @@ const Video = require('../models/videos');
 const { google } = require('googleapis');
 const { nextTick } = require('process');
 const flash = require('flash');
+const { findByIdAndDelete } = require('../models/videos');
 const youtube = google.youtube({ version: 'v3', auth: oAuth2Client})
 
 //Get upload form
@@ -32,13 +33,9 @@ router.get('/index', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
-
     const video = await Video.findById(id).lean()
-
     res.render('studio/studio', { video })
 })
-
-
 
 
 
@@ -105,20 +102,16 @@ router.post('/upload', async(req, res) => {
 router.put('/:id/edit', async (req, res) => {
 
     try {
-
             const id = req.params.id
             const video = await  Video.findById(id).lean()
             if(!video){
                 return res.render('error/404')
             }
-
-            //Update Youtube DB via API 
             const title = req.body.title;
             const description = req.body.description; 
             const tags = req.body.tags; 
             const status = req.body.status; 
             youtube.videos.update({
-
                                 resource: {
                                     kind: "youtube#video",
                                     id: video.youtube_video_url,
@@ -133,64 +126,60 @@ router.put('/:id/edit', async (req, res) => {
                                     }
                                 },
                                 part: "snippet,status",
-
-
                             },
                             async function (err, data, res) {
                                 if (err) {
                                     console.log(err);
-                                    //res.end("Something went wrong");
                                 } else if (data) {
-                                                // Update mongoDB: 
+                             
                                 const videoUpdated = await Video.findByIdAndUpdate(id,req.body, {        
                                     new: true,
                                     runValidators: true});
-
-                                console.log(data.data.id, 'is updated successfully');
-                           
+                                console.log(data.data.id, 'is updated successfully');                           
                                 }
                             }
-
                         )
                         req.flash('success', `${video.title} is successfully updated... !!!`)
-                        res.redirect('/videos/index')     
-
-
-
-   
+                        res.redirect('/videos/index')    
     } catch (error) {
         console.error(error)
-
-        return res.render('error/500')
-        
+        return res.render('error/500')        
     }
-
-
-
-
-
 })
+
+
 //Delete Vides
 //DELETE /videos/:id/delete
 router.delete('/:id/delete', async (req, res) => {
-    const youtube = google.youtube({ version: "v3", auth: oAuth2Client });
-    youtube.videos.delete(
-        {
-            id: "YPUN0l3VicU",
-        },
-        function (err, data, res) {
-            if (err) {
-                console.log(err);
-                res.end("Something went wrong");
-            } else if (data) {
-
-                console.log(data);
-            }
+    try {
+        const id = req.params.id
+        const isModal = !!req.body.modal
+        const video = await Video.findById(id).lean()
+        if(!video){
+            return res.render('error/404')
         }
+        const youtube = google.youtube({ version: "v3", auth: oAuth2Client });
+        youtube.videos.delete(
+            {
+                id: video.youtube_video_url,
+            },
+            async function (err, data, res) {
+                if (err) {
+                    console.log(err);
+                    //res.end("Something went wrong");
+                } else if (data) {
+                    const delvideo = await Video.findByIdAndDelete(id)
+                    console.log(video.youtube_video_url, 'is successfully deleted')
 
-    )
-    res.redirect('/')
+                }
+            }   
+        )
+        req.flash('error',`${video.title} is successfully deleted`)
+        res.redirect('/')        
+    } catch (error) {
+        console.error(error)
+        return res.render('error/500')       
+    }
 })
-
 
 module.exports = router; 

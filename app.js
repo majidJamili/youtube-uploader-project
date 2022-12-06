@@ -25,10 +25,18 @@ const methodOverride = require('method-override')
 const flash = require('connect-flash');
 
 
+
 //Conncet to Database: 
 connectDB()
 
-app.engine('.hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
+
+// Handlebars Helpers
+const {
+  json,
+} = require('./helpers/hbs')
+
+
+app.engine('.hbs', exphbs.engine({ helpers:{json}, defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', '.hbs');
 
 
@@ -38,8 +46,6 @@ app.use(session({ secret: 'myflashmessagesession',
                             cookie: { maxAge: 60000 }}
                                            ));
 app.use(flash());
-
-
 
 app.set('views', path.join(__dirname, '/views'));
 app.use(methodOverride('_method'));
