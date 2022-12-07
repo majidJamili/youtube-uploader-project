@@ -33,10 +33,11 @@ connectDB()
 // Handlebars Helpers
 const {
   json,
+  section,
 } = require('./helpers/hbs')
 
 
-app.engine('.hbs', exphbs.engine({ helpers:{json}, defaultLayout: 'main', extname: '.hbs' }))
+app.engine('.hbs', exphbs.engine({ helpers:{json, section}, defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', '.hbs');
 
 

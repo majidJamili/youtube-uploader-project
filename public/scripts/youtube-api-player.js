@@ -2,25 +2,155 @@ var tag = document.createElement('script');
 tag.id = 'iframe-demo';
 tag.src = 'https://www.youtube.com/iframe_api';
 var firstScriptTag = document.getElementsByTagName('script')[1];
+
+
+
+// console.log('data video: ')
+// console.log(video)
+
+
+console.log('first script: ')
+console.log(firstScriptTag)
+
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
 function onYouTubeIframeAPIReady() {
-  player = new YT.Player('studio-iframe', {
+  player = new YT.Player('existing-iframe-example', {
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
       }
   });
 
-    document.getElementById('pause').onclick = function(){
-        player.pauseVideo();
-        };
-    document.getElementById('seek-video').onclick = function(){
+  
+
+        document.getElementById('seek-video').onclick = function(){
             const currentTime = Math.round(player.getCurrentTime()); 
             player.seekTo(currentTime + 30 , true); 
         };
+        document.getElementById('pause').onclick = function(){
+          player.pauseVideo();
+        };
+        document.getElementById('play').onclick = function(){
+          player.playVideo();
+        };
+        document.getElementById('seek-back').onclick = function(){
+          const currentTime = Math.round(player.getCurrentTime()); 
+          player.seekTo(currentTime - 5 , true); 
+      };
+      document.getElementById('add-task').onclick = function(){
+        player.pauseVideo();
+        var currentTime = Math.round(player.getCurrentTime()); 
+        document.getElementById('myFlashCard').style.display ="block";     
+        const startTimeInput = document.getElementById('start-time-input'); 
+        startTimeInput.value = currentTime
+    };
+    document.getElementById('stop-task').onclick = function(){
+      player.pauseVideo();
+      var currentTime = Math.round(player.getCurrentTime());   
+      const startTimeInput = document.getElementById('end-time-input'); 
+      startTimeInput.value = currentTime
+  };
+  document.getElementById('start-time-input').addEventListener("input", (event)=>{
+    player.seekTo(document.getElementById('start-time-input').value)
+  })
+  document.getElementById('end-time-input').addEventListener("input", (event)=>{
+    player.seekTo(document.getElementById('end-time-input').value)
+  })
+
 }
+
+
+function onPlayerReady(event) {
+    // console.log('event data'); 
+    // console.log(event); 
+  document.getElementById('existing-iframe-example').style.borderColor = '#FF6D00';
+}
+function changeBorderColor(playerStatus) {
+                var color;
+                if (playerStatus == -1) {
+                    color = "#37474F"; // unstarted = gray
+                } else if (playerStatus == 0) {
+                    color = "#FFFF00"; // ended = yellow
+                } else if (playerStatus == 1) {
+                    color = "#33691E"; // playing = green
+                } else if (playerStatus == 2) {
+                    color = "#DD2C00"; // paused = red
+                } else if (playerStatus == 3) {
+                    color = "#AA00FF"; // buffering = purple
+                } else if (playerStatus == 5) {
+                    color = "#FF6DOO"; // video cued = orange
+                }
+                if (color) {
+                    document.getElementById('existing-iframe-example').style.borderColor = color;
+                }
+}
+function getOnreadyStatus(event){
+
+}
+
+function onPlayerStateChange(event) {
+  changeBorderColor(event.data);
+}
+
+
+
+
+// var tag = document.createElement('script');
+// tag.id = 'iframe-demo';
+// tag.src = 'https://www.youtube.com/iframe_api';
+// var firstScriptTag = document.getElementsByTagName('script')[0];
+// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// var player;
+// function onYouTubeIframeAPIReady() {
+//   player = new YT.Player('existing-iframe-example', {
+//     //   events: {
+//     //     'onReady': onPlayerReady,
+//     //     'onStateChange': onPlayerStateChange
+//     //   }
+//   });
+
+//         document.getElementById('seek-video').onclick = function(){
+//             const currentTime = Math.round(player.getCurrentTime()); 
+//             player.seekTo(currentTime + 30 , true); 
+//         };
+//         document.getElementById('pause').onclick = function() {
+//           player.pauseVideo();
+
+//       };
+// }
+
+
+
+
+
+// var tag = document.createElement('script');
+// tag.id = 'iframe-demo';
+// tag.src = 'https://www.youtube.com/iframe_api';
+// var firstScriptTag = document.getElementsByTagName('script')[0];
+// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// var player;
+// function onYouTubeIframeAPIReady() {
+//   player = new YT.Player('studio-iframe', {
+//       // events: {
+//       //   'onReady': onPlayerReady,
+//       //   'onStateChange': onPlayerStateChange
+//       // }
+//   });
+
+//     document.getElementById('pause').onclick = function(){
+//         player.pauseVideo();
+//         };
+//     document.getElementById('seek-video').onclick = function(){
+//           const currentTime = Math.round(player.getCurrentTime()); 
+//           player.seekTo(currentTime + 30 , true); 
+//       };
+
+
+// }
 
                     // 3. This function creates an <iframe> (and YouTube player)
                     //    after the API code downloads.

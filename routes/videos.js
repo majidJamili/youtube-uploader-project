@@ -28,8 +28,8 @@ router.get('/index', async (req, res) => {
 })
 
 
-//Render all videos:
-// GET /videos/index
+//Render Studio:
+// GET /videos/studio
 
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
@@ -81,7 +81,7 @@ router.post('/upload', async(req, res) => {
 
                             await Video.create({'title':title, 'status': status, 'youtube_video_url': data.data.id, 'description':description, 'tasks':[] })
                             //res.redirect('/videos/upload')
-                            console.log('Video added to DB successfully')                                                       
+                            console.log('Video added to DB successfully')                                                
 
                     }
                 }
