@@ -3,7 +3,6 @@ body {
 }
 
 .custom-card {
-    z-index: 0;
     color: #f1f1f1;
     width: auto;
     height: 50px;
@@ -16,9 +15,9 @@ body {
 .custom-card-wide {
     color: #f1f1f1;
     width: 800px !important;
-    /* align-self: center !important;
+    align-self: center !important;
     top: 50%;
-    left: 50%; */
+    left: 50%;
 }
 
 .white-button {
@@ -60,22 +59,8 @@ body {
         }
     
     
-.collapsible-card-2 {
+    
+                                .collapsible-card-2 {
             display: none;
             height: fit-content !important;
         }
-
-.studio-container{
-    display: grid;
-    align-content: flex-end; 
-
-    
-
-}
-
-.card{
-    align-content: flex-start !important;
-}
-.special-row{
-    z-index: 100 !important;
-}

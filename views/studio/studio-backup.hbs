@@ -1,18 +1,5 @@
-<div class="container">
-<div class="row">
-    <div class="col-sm" style="background-color: ;#37474F">
-        One of three columns
-    </div>
-    <div class="col-md" style="background-color: ;#38474F">
-        One of three columns
-    </div>
-    <div class="col-sm">
-        One of three columns
-    </div>
-    </div>
-    </div>
-    
-    {{!--
+<div class="studio-container">
+
     <div class="card #424242 grey darken-3 custom-card-wide">
         <div class="card-content custom-card-wide">
             <span class=" card-title">{{video.title}}</span>
@@ -22,9 +9,9 @@
                 style="border: solid 4px #37474F">
             </iframe>
             <p>{{video.description}}</p>
-            </div>
-            <div class="card-action center">
-                <a href="#" onclick="openFlashSec()"><i class="fa-solid fa-pen-to-square white-button"></i></a>
+        </div>
+        <div class="card-action center">
+            <a href="#" onclick="openFlashSec()"><i class="fa-solid fa-pen-to-square white-button"></i></a>
 
             <a class="waves-effect waves-light btn modal-trigger btn-floating red darken-3" href="#modal1"><i
                     class="fa-solid fa-trash orange-button"></i></a>
@@ -36,9 +23,9 @@
                     <form method="POST" action="/videos/{{video._id}}/delete?_method=DELETE">
                         <button class="btn btn-floating red darken-3" name="modal" value="open"><i
                                 class="fa-solid fa-trash orange-button"></i></button>
-                        </form>
-                        </div>
-                        </div>
+                    </form>
+                </div>
+            </div>
 
 
         </div>
@@ -70,9 +57,10 @@
                 <input placeholder="Start Time" id="start-time-input" name="task[start]" type="number">
                 <input placeholder="End Time" id="end-time-input" name="task[end]" type="number">
                 <div class="row">
-                    <button class="button btn-floating btn-large green"><i class="fa-solid fa-file-circle-plus"></i></button>
+                    <button class="button btn-floating btn-large green"><i
+                            class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
-                </form>
+            </form>
 
 
         </div>
@@ -96,23 +84,23 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input id="tags-input" type="text" class="form-control" name="tags" data-role="tagsinput" placeholder="tags"
-                        value="{{video.tags}} " />
+                    <input id="tags-input" type="text" class="form-control" name="tags" data-role="tagsinput"
+                        placeholder="tags" value="{{video.tags}} " />
+                </div>
+                <div class="row">
+                    <div class="input-field">
+                        <h5>Edit Your Description</h5>
+                        <textarea id="body" name="description">{{video.description}}</textarea>
                     </div>
-                    <div class="row">
-                        <div class="input-field">
-                            <h5>Edit Your Description</h5>
-                            <textarea id="body" name="description">{{video.description}}</textarea>
-                        </div>
-                    </div>
-                    <div class="row col2">
-                        <button type="submit" class="btn green">Update</button>
-                    </div>
-                    </form>
+                </div>
+                <div class="row col2">
+                    <button type="submit" class="btn green">Update</button>
+                </div>
+            </form>
 
         </div>
-        </div>
-
+    </div>
+</div>
 
 
 
