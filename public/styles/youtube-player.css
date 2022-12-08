@@ -8,14 +8,47 @@
     box-sizing: border-box;
 } */
 
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+
 body {
+    margin: 0;
     font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #ebe9e9, #8a8989);
+}
+.studio-container{
+    width: fit-content;
 }
 
-.video-container {
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-bottom: 10px;
+.studio-grid {
+    width: 90rem;
+    display: grid;
+    grid-template-columns: 20rem 70rem; 
+    grid-template-rows: repeat(2, minmax(7rem, auto));
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-top: 2rem;
+    justify-content: center;
+    outline: none;
+    background-color: rgb(245, 245, 240);
+    
+}
+.video-panel{
+    background-color: dimgrey;
+    color: white;
+}
+
+.task-panel{
+    background-color: rgb(255, 255, 255);
+}
+.studio-playlist{
+    background-color: rgb(255, 255, 255);
+}
+
+.video-control-panel{
+    background-color: rgb(255, 255, 255);
 }
 
 .taskpanel-from-grid {
@@ -27,94 +60,8 @@ body {
     text-align: center;
     align-items: center;
 }
-
 .span-two {
-    grid-column: span 3;
+    grid-column: span 2;
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-}
-
-.material-symbols-outlined {
-    font-size: 60px;
-    color: rgb(14, 14, 14);
-}
-
-.play .material-symbols-outlined {
-    font-size: 60px;
-    color: rgb(64, 197, 11);
-}
-
-.pause .material-symbols-outlined {
-    font-size: 60px;
-    color: rgb(219, 181, 10);
-}
-
-.open-button {
-    background-color: #555;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    position: fixed;
-    bottom: 23px;
-    right: 28px;
-    width: 280px;
-}
-
-.form-popup {
-    display: none;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    border: none;
-    z-index: 100;
-}
-
-.taskpanel-form-container {
-    max-width: 300px;
-    padding: 10px;
-    background-color: black;
-    color: white;
-}
-
-.taskpanel-form-container-header {
-    display: flex;
-    flex-direction: row;
-
-}
-
-
-.taskpanel-form-container .btn-success {
-    background-color: rgba(6, 179, 6, 0.7);
-    border: none;
-    width: 50%;
-    margin-bottom: 10px;
-
-}
-
-.taskpanel-form-container .btn-danger {
-    background-color: rgba(223, 7, 25, 0.7);
-    border: none;
-    width: 25%;
-    margin-bottom: 10px;
-}
-
-.taskpanel-form-container .cancel {
-    background-color: red;
-}
-
-.taskpanel-form-container .btn:hover,
-.open-button:hover {
-    opacity: 1;
-}
-
-.btn-close {
-    background-color: crimson;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}
+/* THIS IS THE DRAG AND DROP STYLE */

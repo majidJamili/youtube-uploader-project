@@ -22,18 +22,11 @@
 </head>
 
 <body>
-
-    {{>_header}}
-    {{>_add_btn}}
-    {{>_flash}}
-
-
-
-
-
+            {{>_header}}
     <div class="container">
+            {{>_add_btn}}
+            {{>_flash}}
             {{{body}}}
-
     </div>
 
 
@@ -54,7 +47,7 @@
     </script>
 
 
-        {{!-- {{{_sections.script}}} --}}
+        {{{_sections.script}}}
 </body>
 
 </html>

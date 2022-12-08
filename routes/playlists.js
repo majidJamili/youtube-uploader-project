@@ -5,6 +5,25 @@ const oAuth2Client = require('../config/middlewares');
 const { google } = require('googleapis');
 const Video = require('../models/videos');
 
+
+// Get Playlist Items
+//@GET: /playlists/:wsId/list
+
+
+router.get('/list', async(req,res)=>{
+    const youtube = google.youtube({ version: "v3", auth: oAuth2Client });  
+        youtube.playlistItems.list({
+          "part": ["snippet"],
+          "playlistId": "PLGpckAHc3_sqcRVwer1QqNsn1uqulAZn1"
+        }).then(function(response) {
+                    console.log("Response", response.data.items[0].snippet.resourceId.videoId);
+        },
+        function(err) { console.error("Execute error", err); });
+})
+
+
+
+
 // Create Playlist
 //Posts /playlists/create
 router.post("/create", async (req, res) => {
