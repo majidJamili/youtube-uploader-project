@@ -17,10 +17,14 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('existing-iframe-example', {
+      playerVars: {
+          'controls': 0,
+          'autoplay': 0          
+        },
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
-      }
+      }, 
   });
 
   

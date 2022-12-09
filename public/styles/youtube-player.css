@@ -47,8 +47,50 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
+
 .video-control-panel{
     background-color: rgb(255, 255, 255);
+    background-color: dimgrey;
+}
+
+.control-panel-buttons{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(3rem, auto)); 
+    margin: 10px;
+
+
+}
+.left-container-aligned a{
+    margin-left: 15px;
+}
+
+.right-container-aligned {
+    width: fit-content;
+}
+.right-container-aligned a{
+    margin-left: 15px;
+    text-align: end;
+}
+
+
+.studio-tools{
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    top: 8px;
+    left: 90%;
+    
+}
+
+.left-container-aligned{
+    position: relative;
+    left: 5px;
+}
+
+
+.tasks-disposal-panel{
+    background-color: rgb(255, 255, 255);
+
 }
 
 .taskpanel-from-grid {
@@ -60,8 +102,58 @@ body {
     text-align: center;
     align-items: center;
 }
+.task-form-panel{
+    background-color: #8a8989;
+}
+
+.custom-icons{
+    font-size: 35px;
+    color: aliceblue;
+}
+.close-btn-panel{
+    position: relative;
+    top:15px; 
+    left: 45%;
+    font-size: 24px;
+    color: tomato;
+}
+.task-form-container{
+    padding: 40px;
+}
+.task-form-container-t{
+    padding: 20px;
+    background-color: rgba(255, 252, 252, 0.274);
+    align-items: center;
+    appearance: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+}
+.task-form-container-t input{
+    width: 95% !important;
+}
+.task-form-container-t form{
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+
+.green-icons{
+    color: rgb(84, 235, 70);
+}
+
+.red-icons{
+    color:tomato;
+}
+
 .span-two {
     grid-column: span 2;
 }
+#myFlashCardSecond{
+    display: none;
+
+}
+
+.form-select{
+    width: 95% !important;
+}
+
 
 /* THIS IS THE DRAG AND DROP STYLE */
