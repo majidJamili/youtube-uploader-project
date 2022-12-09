@@ -16,15 +16,17 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #ebe9e9, #8a8989);
+    background: linear-gradient(to right,#f2f2f2, #f3f3f3);
 }
 .studio-container{
     width: fit-content;
+    
 }
 
 .studio-grid {
     width: 90rem;
     display: grid;
+
     grid-template-columns: 20rem 70rem; 
     grid-template-rows: repeat(2, minmax(7rem, auto));
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -36,9 +38,13 @@ body {
     
 }
 .video-panel{
-    background-color: dimgrey;
-    color: white;
+    background-color: #ffff;
+
 }
+.video-panel  i{
+    color:  #4e4e4e;
+}
+
 
 .task-panel{
     background-color: rgb(255, 255, 255);
@@ -49,16 +55,16 @@ body {
 
 
 .video-control-panel{
-    background-color: rgb(255, 255, 255);
-    background-color: dimgrey;
+    background-color: #fff;
 }
 
 .control-panel-buttons{
     display: grid;
     grid-template-columns: repeat(2, minmax(3rem, auto)); 
     margin: 10px;
-
-
+}
+.control-panel-buttons i{
+color:#4e4e4e; 
 }
 .left-container-aligned a{
     margin-left: 15px;
@@ -87,6 +93,10 @@ body {
     left: 5px;
 }
 
+.left-container-aligned .add-task i{
+    color: #009246;
+
+}
 
 .tasks-disposal-panel{
     background-color: rgb(255, 255, 255);
@@ -115,7 +125,7 @@ body {
     top:15px; 
     left: 45%;
     font-size: 24px;
-    color: tomato;
+    color: #CE2B37;
 }
 .task-form-container{
     padding: 40px;
@@ -136,11 +146,11 @@ body {
 }
 
 .green-icons{
-    color: rgb(84, 235, 70);
+    color: #009246 !important; 
 }
 
 .red-icons{
-    color:tomato;
+    color: #CE2B37 !important;
 }
 
 .span-two {

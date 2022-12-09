@@ -1,0 +1,26 @@
+.custom-nav{
+    background-color: #ffff;
+    border: 1.5px solid #4e4e4e; 
+    border-radius: 8px;
+    width: auto;
+
+}
+
+.custom-nav i{
+    color: #4e4e4e;
+}
+.custom-nav a{
+    color: #4e4e4e;
+}
+
+.sidenav{
+    background-color: #ffff;
+    border: 1.5px solid #009246;
+    width: auto;
+}
+.sidenav i{
+    color: #009246;
+}
+.sidenav li .fa-solid {
+    color: #009246;
+}
