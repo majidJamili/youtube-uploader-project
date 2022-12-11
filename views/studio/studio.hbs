@@ -15,10 +15,11 @@
                     </div>
                 </div>
                 <div class="video-panel">
-
                     <div class="studio-tools">
-                        <a href="#" onclick="openFlashSec()"><i class="fa-solid fa-pen-to-square custom-icons"></i></a>
-                        <a class="waves-effect waves-light btn modal-trigger btn-floating red darken-3" href="#modal1"><i  class="fa-solid fa-trash orange-button"></i></a>
+                        <div class="containers-header-bar">
+                            <a href="#" onclick="openFlashSec()"><i class="fa-solid fa-pen-to-square custom-icons"></i></a>
+                            <a class="btn modal-trigger btn-floating red darken-2" href="#modal1"><i class="fa-solid fa-trash"></i></a>
+                            </div>
                                     <div id="modal1" class="modal" style="color: black; height: 150px">
                                         <div class="modal-content" style="color: black; height: 150px">
                                             <h5 style="color: black; height: 10px">Is it certainly necessary to delete this video?</h5>
@@ -30,8 +31,17 @@
                                         </div>
                                     </div>
                     </div>
-                    <h6><span class="card-title">{{video.title}}</span></h6>                    
-                    <br>
+                    <blockquote>
+                        <div class="studio-header">
+                            <h6>WROKSTATION TITLE:</h6>
+                            <h5>Metal Prepareation</h5>
+                            <h6>RFID</h6>
+                            <h5>IRN001524-PNT</h5>
+                            <h6>VIDEO TITLE: </h6>
+                            <h6><span class="card-title">{{video.title}}</span></h6>
+                    </div>
+                    </blockquote>
+
                     <iframe id="existing-iframe-example" width="1000" height="560"
                         src="https://www.youtube.com/embed/{{video.youtube_video_url}}?controls=0&enablejsapi=1&rel=0" frameborder="0"
                         {{!-- src="https://www.youtube.com/embed/{{video.youtube_video_url}}?enablejsapi=1" frameborder="0" --}}
@@ -55,34 +65,42 @@
                                         <a href="#" id="seek-video"><i class="fa-solid fa-forward custom-icons "></i></a>
                                 </div>                                    
                             </div>
-                            <div class="task-form-panel">
+                            <div class="task-form-panel" id="myFlashCard">
+                                <div class="containers-header-bar">
+                                    <a href="#" onclick="closeFlash()"><i class="fa-solid fa-circle-xmark close-btn-panel"></i></a>
+                                </div>
                                 <div class="task-form-container-t">
-                                        <form action="#" method="POST">
-                                                <input placeholder="TASK TITLE" name="task[name]" id="taskName" type="text" class="validate">
+                                                <form action="/tasks/add/id" method="POST" id="task_form_studio">
+                                                    <input type="hidden" id="video-link" name="url" value="" id="task-video-url">
+                                                    <input placeholder="TASK TITLE" name="task[name]" id="task-title" type="text" class="validate">
                                                 
-                                                <select class="form-select">
-                                                    <option selected>SELECT ACTIVITY TYPE</option>
-                                                    <option value="Value-adding">VALUE-ADDING</option>
-                                                    <option value="Non-value-adding">NON-VALUE-ADDING</option>
-                                                    <option value="Waste">WASTE</option>
-                                                </select>
+                                                    <select class="form-select" id="task-type">
+                                                        <option selected>SELECT ACTIVITY TYPE</option>
+                                                        <option value="Value-adding">VALUE-ADDING</option>
+                                                        <option value="Non-value-adding">NON-VALUE-ADDING</option>
+                                                        <option value="Waste">WASTE</option>
+                                                    </select>
 
-                                                
                                                 <input placeholder="Start Time" id="start-time-input" name="task[start]" type="number">
                                                 <input placeholder="End Time" id="end-time-input" name="task[end]" type="number">
+                                                <br>
                                                 <div class="span-two">
-                                                    <button class="button btn-floating btn-large green"><i class="fa-solid fa-file-circle-plus"></i></button>
+                                                    <button type="button" class="button btn-floating btn-large green" onclick="submitTaskStudio()"><i
+                                                            class="fa-solid fa-file-circle-plus"></i></button>
                                                 </div>
-                                                
-                                                    
-                                                
-                                    </form>
+                                        </form>
+                                        <form action="/tasks/add" id="responses-form" method="POST">
+                                            <input type="hidden" name="responses" id="responses-id" value="">
+                                            <button type="button" onclick="submitResponse()">save tasks</button>
+                                        </form>
                                 </div>
                             </div>
+                            <br>
 
                             <div class="task-form-panel" id="myFlashCardSecond">
-                                <a href="#" onclick="closeFlashSec()"><i class="fa-solid fa-circle-xmark close-btn-panel"></i></a>
-                                <br>
+                                <div class="containers-header-bar">
+                                    <a href="#" onclick="closeFlashSec()"><i class="fa-solid fa-circle-xmark close-btn-panel"></i></a>
+                                </div>
                                 <div class="task-form-container">
                                         <form action="/videos/{{video._id}}/edit?_method=PUT" method="POST" class="col">
                                             <input type="text" id="title" name="title" value="{{video.title}}">
@@ -216,6 +234,11 @@
 
 {{#section 'script'}}
     <script src="/scripts/drag-n-drop.js"></script>
+    <script type="text/javascript">
+        const video = {{{ json video }}}
+    </script>
+    
+    <script src="/scripts/submit-task-form.js"></script>
 
 {{/section}}
 

@@ -11,6 +11,9 @@ const taskSchema = new Schema({
     types: {
         type: Array
     },
+    youtube_video_url: {
+        type: String
+    },
     video: [{
         type: Schema.Types.ObjectId,
         ref: 'Video'

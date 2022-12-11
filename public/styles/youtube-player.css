@@ -22,6 +22,20 @@ body {
     width: fit-content;
     
 }
+.studio-header {
+    position: relative;
+    margin-top: -50px;
+    top: 0px;
+    right: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(5rem, 15rem));
+    grid-template-rows: auto;
+
+}
+
+.studio-header h6 {
+    font-weight: bold;
+}
 
 .studio-grid {
     width: 90rem;
@@ -60,9 +74,15 @@ body {
 
 .control-panel-buttons{
     display: grid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border: 1px solid #f3f3f3;
+        border-radius: 5px;
+        background-color: #f3f3f3;
     grid-template-columns: repeat(2, minmax(3rem, auto)); 
     margin: 10px;
+    padding: 5px;
 }
+
 .control-panel-buttons i{
 color:#4e4e4e; 
 }
@@ -83,9 +103,7 @@ color:#4e4e4e;
     width: fit-content;
     height: fit-content;
     position: relative;
-    top: 8px;
-    left: 90%;
-    
+
 }
 
 .left-container-aligned{
@@ -103,6 +121,16 @@ color:#4e4e4e;
 
 }
 
+.containers-header-bar {
+    width: fit-content;
+    margin-top: 0px;
+    height: 50px;
+    border-radius: 5px;
+    position: relative;
+    left: 65rem;
+    top: 1rem;
+
+}
 .taskpanel-from-grid {
     margin-top: 1rem;
     display: grid;
@@ -112,12 +140,20 @@ color:#4e4e4e;
     text-align: center;
     align-items: center;
 }
-.task-form-panel{
-    background-color: #8a8989;
+.task-form-panel {
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+
+    border: 1px #f2f2f2 solid;
+    border-radius: 5px;
+    background-color: #f3f3f3;
+
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px;
 }
 
 .custom-icons{
-    font-size: 35px;
+    font-size: 28px;
     color: aliceblue;
 }
 .close-btn-panel{
@@ -132,10 +168,9 @@ color:#4e4e4e;
 }
 .task-form-container-t{
     padding: 20px;
-    background-color: rgba(255, 252, 252, 0.274);
     align-items: center;
     appearance: none;
-    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+
 }
 .task-form-container-t input{
     width: 95% !important;
@@ -159,6 +194,9 @@ color:#4e4e4e;
 #myFlashCardSecond{
     display: none;
 
+}
+#myFlashCard {
+    display: none;
 }
 
 .form-select{
