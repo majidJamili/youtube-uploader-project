@@ -5,9 +5,9 @@ const taskSchema = new Schema({
     title: {
         type: String
     },
-    time: [{
+    time: {
         type: Number
-    }],
+    },
     types: {
         type: Array
     },
