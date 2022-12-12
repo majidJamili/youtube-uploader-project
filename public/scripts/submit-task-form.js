@@ -1,13 +1,40 @@
+const paramsDB = video._id;
 
-console.log('Conncet to task form')
-console.log('video data', video._id)
+var responses = [];
 
-function getDuration(str_time, end_time) {
+
+function responseTaskUI(title, status, time) {
+
+
+
+    const container = document.getElementById('task-panel-container');
+    const taskDIV = document.createElement('div');
+    taskDIV.classList.add('draggable');
+    taskDIV.classList.add('task');
+    taskDIV.setAttribute('draggable', true);
+    const taskTitlePara = document.createElement('p');
+    const titleText = document.createTextNode(title);
+    taskTitlePara.appendChild(titleText);
+    taskDIV.appendChild(taskTitlePara);
+
+    //status containers
+    const statusDIV = document.createElement('div');
+    statusDIV.classList.add('task-type-success');
+    taskDIV.appendChild(statusDIV);
+
+    // Time Container
+    const timeDIV = document.createElement('div');
+    timeDIV.innerText = time;
+    timeDIV.classList.add('task-time');
+    taskDIV.appendChild(timeDIV);
+
+    container.appendChild(taskDIV);
+
+
+
 
 }
 
-
-var  responses = [];
 
 function submitTaskStudio() {   
     
@@ -20,6 +47,9 @@ function submitTaskStudio() {
     const types = elements['task-type'].value;
     elements['video-link'].value = video.youtube_video_url + '&t=' + startTime + 's';
     const youtube_video_url = elements['video-link'].value;
+    responseTaskUI(title, types, time)
+    updateDragList()
+
 
     responses.push({
         title: title,
@@ -28,6 +58,7 @@ function submitTaskStudio() {
         youtube_video_url: youtube_video_url
     })
     return (responses);
+
 }
 
 
@@ -36,8 +67,6 @@ function nullResponses(arr){
 }
 
 
-
-const paramsDB = video._id; 
 
 
 async function submitResponse() {

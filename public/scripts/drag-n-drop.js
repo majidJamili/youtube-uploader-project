@@ -1,5 +1,17 @@
-const draggables = document.querySelectorAll('.draggable')
-const containers = document.querySelectorAll('.container-studio-dragndrop')
+
+var draggables = document.querySelectorAll('.draggable')
+var containers = document.querySelectorAll('.container-studio-dragndrop')
+
+function updateDragList() {
+  console.log('update draggables being called.. ')
+  var draggables = document.querySelectorAll('.draggable')
+  var containers = document.querySelectorAll('.container-studio-dragndrop')
+  //console.log('draggables', draggables);
+  return (draggables, containers)
+}
+
+
+
 
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', () => {

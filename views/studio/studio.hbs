@@ -7,7 +7,7 @@
                 <div class="task-panel">
                     <h6><p>activities</p></h6>
                     
-                    <div class="container-studio-dragndrop">
+                    <div class="container-studio-dragndrop" id="task-panel-container">
                             <div class="draggable task" draggable="true">
                                 <p>TASK DRILLL IMPLEMENTTATION</p> <div class="task-type-success"></div>
                                 <div class="task-time">125</div>
@@ -54,7 +54,8 @@
 
                 <div class="video-control-panel">
                             <div class="control-panel-buttons">
-                                <div class="left-container-aligned">                                    
+                                <div class="left-container-aligned">
+                                    <a href="#" onclick="responseTaskUI()">Create UI</a>
                                         <a href="#" id="add-task"><i class="fa-solid fa-thumbtack custom-icons green-icons"></i></a>
                                         <a href="#" id="stop-task"><i class="fa-solid fa-stop custom-icons red-icons"></i></a>
                                 </div>
@@ -239,6 +240,9 @@
     </script>
 
     <script src="/scripts/submit-task-form.js"></script>
+    {{!--
+    <script src="/scripts/drag-n-drop.js"></script> --}}
+
 
 {{/section}}
 
