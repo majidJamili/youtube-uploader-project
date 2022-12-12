@@ -9,7 +9,7 @@ const taskSchema = new Schema({
         type: Number
     },
     types: {
-        type: Array
+        type: String
     },
     youtube_video_url: {
         type: String
