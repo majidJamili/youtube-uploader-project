@@ -13,7 +13,7 @@
 }
 
 .task {
-
+    min-width: 18rem;
     cursor: move;
     padding: .25rem .25rem .25rem .25rem ;
     margin: .15rem .15rem .15rem .15rem ;    
@@ -50,6 +50,8 @@
     font-size: .9rem;
     color: rgb(31, 28, 28);
     font-weight: 500;
+    overflow-wrap: normal;
+
 
 
 }
@@ -58,14 +60,50 @@
 
 /* TASK TYPES */
 .task-type-success{
-    background-color: rgb(163, 8, 112);
-    width: 1.2rem;
-    height: 1.2rem; 
+
+    background-color: #009246;
+    width: 15px; 
+    height: 15px;
     border-radius: 50%;
+    
+
     align-self: center;
     justify-self: center;
 
 }
+.status-success{
+color: #009246 !important;
+font-size: 20px;
+
+}
+.status-non-value{
+    color: #92007a;
+    font-size: 20px;
+    
+    }
+.status-essential{
+        color: #c4c701;
+        font-size: 20px;
+        
+        }
+.status-wait{
+            color: #0839d8;
+            font-size: 20px;
+            
+            }
+ .status-transport{
+    color: #e65a09;
+    font-size: 20px;
+                
+    }
+ .status-waste{
+    color:  #CE2B37;
+    font-size: 20px;}
+
+                        
+
+
+
 
 
 .task:hover {

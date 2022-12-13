@@ -1,28 +1,19 @@
 
-var draggables = document.querySelectorAll('.draggable')
-var containers = document.querySelectorAll('.container-studio-dragndrop')
 
 function updateDragList() {
   console.log('update draggables being called.. ')
   var draggables = document.querySelectorAll('.draggable')
   var containers = document.querySelectorAll('.container-studio-dragndrop')
-  //console.log('draggables', draggables);
-  return (draggables, containers)
-}
-
-
-
-
-draggables.forEach(draggable => {
-  draggable.addEventListener('dragstart', () => {
-    draggable.classList.add('dragging')
+  draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', () => {
+      console.log(draggable)
+      draggable.classList.add('dragging')
+    })
+  
+    draggable.addEventListener('dragend', () => {
+      draggable.classList.remove('dragging')
+    })
   })
-
-  draggable.addEventListener('dragend', () => {
-    draggable.classList.remove('dragging')
-  })
-})
-
 containers.forEach(container => {
   container.addEventListener('dragover', e => {
     e.preventDefault()
@@ -49,3 +40,14 @@ function getDragAfterElement(container, y) {
     }
   }, { offset: Number.NEGATIVE_INFINITY }).element
 }
+
+
+}
+
+
+
+
+
+
+
+

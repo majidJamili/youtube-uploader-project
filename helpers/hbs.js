@@ -8,5 +8,8 @@ module.exports = {
         if (!this._sections) this._sections = {};
         this._sections[name] = options.fn(this); 
         return null;
+    }, 
+    toUpperCase:function(str){
+        return str.toUpperCase(); 
     }
 }

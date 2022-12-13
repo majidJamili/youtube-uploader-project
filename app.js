@@ -35,10 +35,11 @@ connectDB()
 const {
   json,
   section,
+  toUpperCase,
 } = require('./helpers/hbs')
 
 
-app.engine('.hbs', exphbs.engine({ helpers:{json, section}, defaultLayout: 'main', extname: '.hbs' }))
+app.engine('.hbs', exphbs.engine({ helpers:{json, section, toUpperCase}, defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', '.hbs');
 
 

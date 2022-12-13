@@ -1,8 +1,36 @@
 const paramsDB = video._id;
-
 var responses = [];
 
+function pickStatusClass(type){
+    let x =  type;    
+        switch (type) {
+        case 'Value-adding':
+            text = "status-success";
+            break;
+        case 'Non-value-adding':
+            text = "status-non-value";
+            break;
+            case 'Essential':
+                text = "status-essential";
+            break;
+            case 'Allowed Wait':
+                    text = "status-wait";
+            break;
+            case 'Transport':
+                        text = "status-transport";
+            break;
+            case 'Waste':
+                            text = "status-waste";
+            break;
+        default:
+            text = "status-undefined";
+        }
+        return text; 
+}
 
+
+
+// this creates the visial representation of the tasks on the client side:
 function responseTaskUI(title, status, time) {
 
 
@@ -12,31 +40,42 @@ function responseTaskUI(title, status, time) {
     taskDIV.classList.add('draggable');
     taskDIV.classList.add('task');
     taskDIV.setAttribute('draggable', true);
-    const taskTitlePara = document.createElement('p');
-    const titleText = document.createTextNode(title);
-    taskTitlePara.appendChild(titleText);
-    taskDIV.appendChild(taskTitlePara);
+    const titleP = document.createElement('p');
+    titleP.innerHTML = title.toUpperCase(); 
+    taskDIV.appendChild(titleP);
 
     //status containers
-    const statusDIV = document.createElement('div');
-    statusDIV.classList.add('task-type-success');
-    taskDIV.appendChild(statusDIV);
+    const statusID = document.createElement('i');
+    console.log('status', status)
+    console.log('class', pickStatusClass(status))
+    statusID.classList.add(pickStatusClass(status));
+
+
+
+
+    statusID.classList.add('fa-solid');
+    statusID.classList.add('fa-circle');
+
+    taskDIV.appendChild(statusID);
 
     // Time Container
     const timeDIV = document.createElement('div');
-    timeDIV.innerText = time;
+    timeDIV.innerHTML = time;
     timeDIV.classList.add('task-time');
     taskDIV.appendChild(timeDIV);
 
     container.appendChild(taskDIV);
+    updateDragList()
+
+
 
 
 
 
 }
+// this function creates a task 
 
-
-function submitTaskStudio() {   
+function createTask() {   
     
     const form = document.getElementById('task_form_studio');
     const elements = form.elements;
@@ -48,7 +87,7 @@ function submitTaskStudio() {
     elements['video-link'].value = video.youtube_video_url + '&t=' + startTime + 's';
     const youtube_video_url = elements['video-link'].value;
     responseTaskUI(title, types, time)
-    updateDragList()
+    //updateDragList()
 
 
     responses.push({
@@ -62,13 +101,7 @@ function submitTaskStudio() {
 }
 
 
-function nullResponses(arr){
-    var arr = []; 
-}
-
-
-
-
+// this sends all the create tasks to the server side: 
 async function submitResponse() {
     const rawResponse = await fetch('/tasks/add' ,
         {
@@ -79,7 +112,7 @@ async function submitResponse() {
           'Content-type': 'application/json; charset=UTF-8'
         },
         body: JSON.stringify({id: paramsDB,
-                                           data:submitTaskStudio()})
+                                           data:createTask()})
 
       });
       
@@ -96,3 +129,8 @@ async function submitResponse() {
 
 
 
+function closeFlash() { document.getElementById("myFlashCard").style.display = "none"; }
+function openFlash() { document.getElementById("myFlashCard").style.display = "block"; } 
+
+function closeFlashSec() { document.getElementById("myFlashCardSecond").style.display = "none"; }
+function openFlashSec() { document.getElementById("myFlashCardSecond").style.display = "block"; } 

@@ -5,6 +5,8 @@ const {upload} = require('../config/middlewares');
 const oAuth2Client= require('../config/middlewares');
 const fs = require('fs');
 const Video = require('../models/videos'); 
+const types =  ['Value-adding', 'Non-value-adding', 'Essential', 'Allowed Wait', 
+'Transport','Waste']
 
 
 const { google } = require('googleapis');
@@ -34,7 +36,7 @@ router.get('/index', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
     const video = await Video.findById(id).lean()
-    res.render('studio/studio', { video })
+    res.render('studio/studio', { video, types })
 })
 
 
