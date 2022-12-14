@@ -5,25 +5,24 @@
 
             <div class="studio-grid">
                 <div class="task-panel">
-                    <h6><p>activities pallet</p></h6>
+                    <h6>activities pallet</h6>
                     <button type="button" class="button btn-floating btn-large" style="background-color:  #009246;" onclick="submitResponse()"><i class="fa-solid fa-floppy-disk"></i></button>
                     <br>
-                    <br>
-             
+                    <br>   
                     
                     <div class="container-studio-dragndrop" id="task-panel-container">
-                            {{!-- <div class="draggable task" draggable="true">
-                                <p>TASK DRILLL IMPLEMENTTATION</p> <i class="fa-solid fa-circle status-success"></i>
-                                <div class="task-time">125</div>
-                            </div>  --}}
                     </div>
+                    <br>
+                    <div class="container-studio-dragndrop delete-drag-drop" id="task-panel-container-delete" ondragend="emptyBin()" >
+                    </div>
+
+
                 </div>
                 <div class="video-panel">
                     <div class="studio-tools">
-                        <div class="containers-header-bar">
-
-                            <a href="#" onclick="openFlashSec()">  <i class="fa-solid fa-pen-to-square custom-icons"></i></a>
-                            <a class="btn modal-trigger btn-floating red darken-2" href="#modal1"><i class="fa-solid fa-trash"></i></a>
+                            <div class="containers-header-bar">
+                                <a href="#" onclick="openFlashSec()">  <i class="fa-solid fa-pen-to-square custom-icons"></i></a>
+                                <a class="btn modal-trigger btn-floating red darken-2" href="#modal1"><i class="fa-solid fa-trash"></i></a>
                             </div>
                                     <div id="modal1" class="modal" style="color: black; height: 150px">
                                         <div class="modal-content" style="color: black; height: 150px">
@@ -36,6 +35,7 @@
                                         </div>
                                     </div>
                     </div>
+                    <br>
 
 
 
@@ -96,7 +96,7 @@
 
                             <div class="task-form-panel" id="myFlashCardSecond">
                                 <div class="containers-header-bar">
-                                    <a href="#" onclick="closeFlashSec()"><i class="fa-solid fa-circle-xmark close-btn-panel"></i></a>
+                                    <a href="#" onclick="closeFlashSec()"><i class="fa-solid fa-circle-xmark close-btn-panel" ></i></a>
                                 </div>
                                 <div class="task-form-container">
                                         <form action="/videos/{{video._id}}/edit?_method=PUT" method="POST" class="col">

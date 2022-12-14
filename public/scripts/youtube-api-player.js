@@ -9,9 +9,6 @@ var firstScriptTag = document.getElementsByTagName('script')[1];
 // console.log(video)
 
 
-console.log('first script: ')
-console.log(firstScriptTag)
-
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;

@@ -1,6 +1,5 @@
 const paramsDB = video._id;
 var responses = [];
-
 function pickStatusClass(type){
     let x =  type;    
         switch (type) {
@@ -27,9 +26,11 @@ function pickStatusClass(type){
         }
         return text; 
 }
+/// clean the tasks form; being called withing posting response function
+function cleanTaskForm(){ 
+    document.getElementById('task_form_studio').reset(); 
 
-
-
+}
 // this creates the visial representation of the tasks on the client side:
 function responseTaskUI(title, status, time) {
 
@@ -73,8 +74,7 @@ function responseTaskUI(title, status, time) {
 
 
 }
-// this function creates a task 
-
+// this function creates a task
 function createTask() {   
     
     const form = document.getElementById('task_form_studio');
@@ -87,6 +87,7 @@ function createTask() {
     elements['video-link'].value = video.youtube_video_url + '&t=' + startTime + 's';
     const youtube_video_url = elements['video-link'].value;
     responseTaskUI(title, types, time)
+    cleanTaskForm()
     //updateDragList()
 
 
@@ -96,11 +97,9 @@ function createTask() {
         types: types,
         youtube_video_url: youtube_video_url
     })
-    return (responses);
+    //return (responses);
 
 }
-
-
 // this sends all the create tasks to the server side: 
 async function submitResponse() {
     const rawResponse = await fetch('/tasks/add' ,
@@ -112,7 +111,7 @@ async function submitResponse() {
           'Content-type': 'application/json; charset=UTF-8'
         },
         body: JSON.stringify({id: paramsDB,
-                                           data:createTask()})
+                                           data:responses})
 
       });
       
@@ -124,6 +123,21 @@ async function submitResponse() {
 }
 
 
+//this delete the task once dropping is done: 
+
+
+function emptyBin(){
+    const binContainer = document.getElementById('task-panel-container-delete'); 
+    binContainer.innerHTML =''; 
+    binContainer.classList.remove('delete-dragover-drop')
+}
+
+
+/// 
+function changeCSS(){
+    const binContainer = document.getElementById('task-panel-container-delete'); 
+    binContainer.classList.add('delete-dragover-drop')
+}
 
 
 

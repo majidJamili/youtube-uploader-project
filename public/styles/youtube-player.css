@@ -19,7 +19,7 @@ body {
     background: linear-gradient(to right,#f2f2f2, #f3f3f3);
 }
 .studio-container{
-    width: fit-content;
+    /* width: fit-content; */
     
 }
 .studio-header {
@@ -100,9 +100,6 @@ color:#4e4e4e;
 
 
 .studio-tools{
-    width: fit-content;
-    height: fit-content;
-    position: relative;
 
 }
 
@@ -122,13 +119,18 @@ color:#4e4e4e;
 }
 
 .containers-header-bar {
-    width: fit-content;
+
     margin-top: 0px;
-    height: 50px;
-    border-radius: 5px;
+
     position: relative;
-    left: 65rem;
-    top: 1rem;
+    height: fit-content;
+    top: .75rem;
+    right: 0.75rem;
+    display: flex; 
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 10px;
+
 
 }
 .taskpanel-from-grid {
@@ -205,3 +207,48 @@ color:#4e4e4e;
 
 
 /* THIS IS THE DRAG AND DROP STYLE */
+.container-studio-dragndrop{
+    border-radius: 10px;
+    position: relative;
+    left: 0.25rem;
+     min-height: 10rem;
+}
+.delete-drag-drop{
+    background-image: url("/icons/icons8-delete-trash-50.png") ;
+    border: 1px solid #4e4e4e;
+
+    background-repeat: no-repeat;
+    background-size: 2rem 2rem;
+    background-position: center;
+    min-height: 5rem;
+    align-content: center;
+    border-radius: 10px;
+    position: relative;
+    bottom: -20rem;
+    left: 0.25rem;
+    background-color: #ffffff;
+    transition-property: background-size;
+    transition-duration: 2s;
+    transition-delay: 0.5s;
+    transition-property: background-color;
+    transition-duration: 2s;
+    transition-delay: 0.5s;
+
+}
+
+.delete-drag-drop:hover{
+    /* width: 30rem; */
+    background-color: #CE2B37;
+    background-size: 3rem 3rem;
+
+
+}
+
+.delete-dragover-drop{
+
+    
+  
+    background-color: #0b156b;
+
+}
+
