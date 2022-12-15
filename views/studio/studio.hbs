@@ -6,7 +6,7 @@
             <div class="studio-grid">
                 <div class="task-panel">
                     <h6>activities pallet</h6>
-                    <button type="button" class="button btn-floating btn-large" style="background-color:  #009246;" onclick="submitResponse()"><i class="fa-solid fa-floppy-disk"></i></button>
+                    <button type="button" class="button btn-floating btn-large" style="background-color:  #009246;" onclick="submitTasks()"><i class="fa-solid fa-floppy-disk"></i></button>
                     <br>
                     <br>   
                     
@@ -68,8 +68,9 @@
                                 </div>
                                 <div class="task-form-container-t">
                                                 <form action="/tasks/add/id" method="POST" id="task_form_studio">
+                                                    <input placeholder="TASK TITLE" name="title" id="task-title" type="text" class="validate">
+
                                                     <input type="hidden" id="video-link" name="url" value="" id="task-video-url">
-                                                    <input placeholder="TASK TITLE" name="task[name]" id="task-title" type="text" class="validate">
                               
 
                     
@@ -85,7 +86,7 @@
                                                 <input placeholder="End Time" id="end-time-input" name="task[end]" type="number">
                                                 <br>
                                                 <div class="span-two">
-                                                    <button type="button" class="button btn-floating btn-large green" onclick="createTask()"><i
+                                                    <button type="button" class="button btn-floating btn-large green" onclick="createDataResponsebyList()"><i
                                                             class="fa-solid fa-file-circle-plus"></i></button>
                                                 </div>
                                         </form>
@@ -115,6 +116,11 @@
                 </div>
             </div>
 </div>
+        <a href="#" onclick="createDataResponsebyList()" >Show List</a>
+        <br>
+        <a href="#" onclick="submitResponse()" >Update Response List</a>
+
+
     
   
 

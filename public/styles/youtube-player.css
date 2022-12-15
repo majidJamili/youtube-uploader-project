@@ -215,7 +215,6 @@ color:#4e4e4e;
 }
 .delete-drag-drop{
     background-image: url("/icons/icons8-delete-trash-50.png") ;
-    border: 1px solid #4e4e4e;
 
     background-repeat: no-repeat;
     background-size: 2rem 2rem;
@@ -226,7 +225,7 @@ color:#4e4e4e;
     position: relative;
     bottom: -20rem;
     left: 0.25rem;
-    background-color: #ffffff;
+    background-color: #CE2B37;
     transition-property: background-size;
     transition-duration: 2s;
     transition-delay: 0.5s;

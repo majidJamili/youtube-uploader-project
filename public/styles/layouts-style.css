@@ -1,0 +1,20 @@
+.login-button-grid{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-auto-rows: minmax(1rem, auto);
+    grid-gap: 0rem;
+
+    /* align-items:end; */
+    /* justify-items: inline; */
+
+    
+}
+.log-button{
+    /* align-self: center;
+    align-items:center;
+    justify-items: center; */
+    /* justify-content: center; */
+    /* align-content: center; */
+
+
+}
