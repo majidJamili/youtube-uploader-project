@@ -91,6 +91,7 @@ app.use('/',require('./routes/index'));
 app.use('/videos', require('./routes/videos'));
 app.use('/playlists', require('./routes/playlists'));
 app.use('/tasks', require('./routes/tasks'));
+app.use('/site', require('./routes/sites'))
 
 
 
