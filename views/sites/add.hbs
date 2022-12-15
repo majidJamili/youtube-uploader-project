@@ -1,0 +1,36 @@
+<h3><i class="fa-solid fa-map-location"></i> CREATE SITE</h3>
+
+<div class="row">
+
+    <form action="/sites/add" method="POST" class="col s12" enctype="multipart/form-data">
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="title" name="site[title]" placeholder="TITLE">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="location" name="site[address]" placeholder="LOCATION" Autocomplete>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="contact" name="site[contact]" placeholder="CONTACT">
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn green btn-floating btn-large">
+            <i class="fa-solid fa-location-pin"></i>
+        </button>
+        <a href="/" class="btn orange btn-floating btn-large"><i class="fa-solid fa-ban"></i></a>
+    </form>
+</div>
+
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmaxQAFcFYm3UMkfV31WLGPV3WIWdthKQ&libraries=places&callback=initMap">
+    </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="/scripts/tags-script.js"></script>
