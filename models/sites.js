@@ -5,8 +5,42 @@ const SiteSchema = new mongoose.Schema({
         type:String, 
         require:true, 
         trim:true
-    },    
+    },
+    geometry: {
+        type: {
+            type: String,
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
     address:{
+        type:String, 
+        require:true
+    },
+    lat:{
+        type:String, 
+        require:true
+    },
+    long:{
+        type:String, 
+        require:true
+    },
+    suburb:{
+        type:String, 
+        require:true
+    },
+    state:{
+        type:String, 
+        require:true
+    },
+    country:{
+        type:String, 
+        require:true
+    },
+    zipcode:{
         type:String, 
         require:true
     },

@@ -7,7 +7,9 @@ router.get('/', (req, res) => {
     res.render('sites/add')
 })
 
-router.post('/', (req, res) => {
+router.post('/add', (req, res) => {
+    console.log(req.body.site); 
+    res.send('form submission was successful')
 
 })
 
