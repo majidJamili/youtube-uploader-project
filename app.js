@@ -24,6 +24,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const methodOverride = require('method-override')
 const flash = require('connect-flash');
+// const FroalaEditor = require('froala-editor'); 
 //const nodeFetch = require('node-fetch'); 
 
 
