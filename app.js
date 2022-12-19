@@ -24,9 +24,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const methodOverride = require('method-override')
 const flash = require('connect-flash');
-// const FroalaEditor = require('froala-editor'); 
-//const nodeFetch = require('node-fetch'); 
-
+const axios = require('axios'); 
 
 //Conncet to Database: 
 connectDB()
@@ -83,8 +81,10 @@ app.use((req, res, next) => {
   res.locals.success = req.flash('success') || null
   res.locals.error = req.flash('error') || null
   res.locals.warning = req.flash('warning') || null
+  res.locals.SECRETES = process.env.GOOGLE_MAP_KEY
   next();
 })
+
 
 
 
