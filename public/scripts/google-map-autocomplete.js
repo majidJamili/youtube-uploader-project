@@ -1,11 +1,8 @@
 
 
-
-
-google.maps.event.addDomListener(window, 'load', initialize);
-var latitude = ''; 
-var longitude =''; 
-var latlng = {}; 
+window.addEventListener('load', (e) => {
+  initialize()
+});
 
 
 function initialize() {
@@ -21,8 +18,7 @@ function initialize() {
 
 
   var place = autocomplete.getPlace();
-  console.log(place.formatted_address)
-  console.log(place.reference)
+
   const place_id = place.reference; 
       if(place_id){
            const iframe = document.createElement('iframe');
@@ -30,9 +26,14 @@ function initialize() {
             iframe.loading = 'eager'; 
             iframe.height = '350'; 
             iframe.allowFullscreen = true; 
-            iframe.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyAqEC6E_t0LzLmtnminHw3Y99kHjmOZRl4&q=place_id:${place_id}` 
+        iframe.src = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAP_KEY}&q=place_id:${place_id}` 
             map.appendChild(iframe); 
       }
+    var latitude = place.geometry.location.lat();
+    var longitude = place.geometry.location.lng();
+
+    document.getElementById('lat').value = latitude;
+    document.getElementById('lng').value = longitude;
   document.getElementById('google_id').value = place_id;
 });}
 

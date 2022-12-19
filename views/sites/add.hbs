@@ -25,9 +25,11 @@
                 <input type="text" id="title" name="site[title]" placeholder="TITLE">
             </div>
         </div>
+
         <div class="row">
             <div class="input-field">
                 <input type="text" id="autocomplete_search" name="site[address]" placeholder="LOCATION" Autocomplete>
+                
                             <div id="map">
                                 {{!-- Place to add  append your API iFrame --}}
                             </div>
@@ -50,12 +52,14 @@
 
 
 {{#section 'script'}}
+    {{#if GOOGLE_MAP_SECRETES}}
+    <script>
+        const GOOGLE_MAP_KEY = {{{ json GOOGLE_MAP_SECRETES }}}
+    </script>
 
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqEC6E_t0LzLmtnminHw3Y99kHjmOZRl4&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAP_SECRETES }}&libraries=places"></script>
+    {{/if}}
     <script src="/scripts/google-map-autocomplete.js"></script>
-
-
 {{/section}}
 
 

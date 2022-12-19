@@ -81,7 +81,7 @@ app.use((req, res, next) => {
   res.locals.success = req.flash('success') || null
   res.locals.error = req.flash('error') || null
   res.locals.warning = req.flash('warning') || null
-  res.locals.SECRETES = process.env.GOOGLE_MAP_KEY
+  res.locals.GOOGLE_MAP_SECRETES = process.env.GOOGLE_MAP_KEY
   next();
 })
 
