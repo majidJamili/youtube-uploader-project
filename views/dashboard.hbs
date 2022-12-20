@@ -1,0 +1,37 @@
+<h6>Dashboard</h6>
+{{!-- <h3>Welcome {{name}}</h3> --}}
+<p>Here are your stories</p>
+{{#if sites}}
+<table class="striped">
+    <thead>
+        <tr>
+            <th>TITLE</th>
+            <th>DATE</th>
+            <th>ACTION</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each sites}}
+        <tr>
+            <td><a href="/sites/{{_id}}" style="font-size: large; font-weight: bolder; color:#009246 ">{{title}}</a></td>
+            <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+            <td>
+                <a href="/sites/{{_id}}/edit" class="btn btn-float"    style="background-color:#009246 ;"     >
+                    <i class="fas fa-edit"></i>
+                </a>
+
+                <form action="/sites/{{_id}}?_method=DELETE" method="POST" id="delete-form">
+                    
+                    <button type="submit" class="btn" style="background-color:#CE2B37;">
+                        <i class="fas fa-trash" ></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>You have not created any sites</p>
+{{/if}}

@@ -2,6 +2,7 @@ const express = require('express');
 const { appengine } = require('googleapis/build/src/apis/appengine');
 const router = express.Router();
 const axios = require('axios'); 
+const Site = require('../models/sites'); 
 
 
 
@@ -36,9 +37,48 @@ router.post('/getaddress', (req,res)=>{
 
 })
 
-router.post('/add', (req, res) => {
-    console.log(req.body.site); 
-    res.send('form submission was successful')
+//Show Edit Site:
+//GET /sites/:id/edit
+router.get('/:id/edit', async(req,res)=>{
+    try {
+        const id = req.params.id; 
+        const site = await Site.findById(id).lean()
+        if(!site){
+            return res.render('error/404')
+        }else{
+            res.render('sites/edit', {site:site})
+        }
+    } catch (error) {
+        console.error(error)
+        return res.render('error/500')
+        
+    }
+
+})
+
+
+
+// Edit Sites:
+// PUT: /edit
+router.put('/edit', async(req, res) => {
+    console.log(req.body);
+    const id = req.body.id; 
+    const data = req.body.data; 
+    const video = await Site.findOneAndUpdate({_id: id}, data,{
+        new: true,
+        runValidators: true,
+    })
+
+})
+
+
+//DELETE SITE: 
+router.delete('/:id', async(req,res)=>{
+    const id = req.params.id; 
+    await Site.remove({id})
+    const sites = await Site.find().lean()
+    res.render('dashboard',{sites:sites})
+
 
 })
 

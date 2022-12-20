@@ -1,4 +1,5 @@
 const mongoose = require('mongoose'); 
+const Schema = mongoose.Schema;
 
 const SiteSchema = new mongoose.Schema({
     title:{
@@ -6,50 +7,27 @@ const SiteSchema = new mongoose.Schema({
         require:true, 
         trim:true
     },
-    geometry: {
-        type: {
-            type: String,
+    coordinates: {
+            type: Array,
             required: true
-        },
-        coordinates: {
-            type: [Number],
-            required: true
-        }
+    },
+    
+    google_place_id:{
+        type:String, 
+        require:true
     },
     address:{
         type:String, 
         require:true
     },
-    lat:{
-        type:String, 
-        require:true
-    },
-    long:{
-        type:String, 
-        require:true
-    },
-    suburb:{
-        type:String, 
-        require:true
-    },
-    state:{
-        type:String, 
-        require:true
-    },
-    country:{
-        type:String, 
-        require:true
-    },
-    zipcode:{
-        type:String, 
-        require:true
-    },
+    
     contact:{
         type:String, 
     },
-    lines:{
-        type:Array
-    },
+    lines:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Line'
+    }], 
     createdAt:{
         type:Date, 
         default:Date.now

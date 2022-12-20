@@ -4,6 +4,8 @@ const passport = require('passport');
 const router = express.Router();
 const oAuth2Client = require('../config/middlewares'); 
 const { google } = require('googleapis');
+const Site = require('../models/sites'); 
+const sites = require('../models/sites');
 
 
 var isAuthenticated = false;
@@ -30,16 +32,16 @@ router.get('/',(req,res)=>{
             auth:oAuth2Client,
             version:"v2"
         });
-        oauth2.userinfo.get(function(err,response){
+        oauth2.userinfo.get( function(err,response){
             if (err) {
                 console.log(err);
             }else{
                 userName = response.data.name;
                 pic = response.data.picture;
                 req.flash('success','You are ready to upload a new vide... are you excited?!');
-                res.render('studio/show', {
+                res.render('dashboard', {
                     name:response.data.name,
-                    pic: response.data.picture
+                    pic: response.data.picture,
                 });
             }
         });
@@ -67,6 +69,12 @@ router.get('/google/callback', (req, res) => {
 
 
 
+
+
+router.get('/dashboard', async(req,res)=>{
+    const sites = await Site.find({}).lean()
+    res.render('dashboard',{sites:sites})
+})
 
 
 

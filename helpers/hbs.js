@@ -11,5 +11,8 @@ module.exports = {
     }, 
     toUpperCase:function(str){
         return str.toUpperCase(); 
-    }
+    }, 
+    formatDate: function (date, format) {
+        return moment(date).utc().format(format)
+    },
 }

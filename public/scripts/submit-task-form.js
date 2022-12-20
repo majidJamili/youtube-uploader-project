@@ -3,6 +3,7 @@
 
 const paramsDB = video._id;
 var responses = [];
+
 function pickStatusClass(type){
     let x =  type;    
         switch (type) {

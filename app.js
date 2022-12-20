@@ -35,10 +35,11 @@ const {
   json,
   section,
   toUpperCase,
+  formatDate
 } = require('./helpers/hbs')
 
 
-app.engine('.hbs', exphbs.engine({ helpers:{json, section, toUpperCase}, defaultLayout: 'main', extname: '.hbs' }))
+app.engine('.hbs', exphbs.engine({ helpers:{json, section, toUpperCase, formatDate}, defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', '.hbs');
 
 
