@@ -1,17 +1,18 @@
-<h6>Dashboard</h6>
+<h1>ies dashboard</h1>
 {{!-- <h3>Welcome {{name}}</h3> --}}
-<p>Here are your stories</p>
+<a href="/sites/add">Make a new site</a>
 {{#if sites}}
 <table class="striped">
     <thead>
         <tr>
-            <th>TITLE</th>
+            <th>SITE TITLE</th>
             <th>DATE</th>
-            <th>ACTION</th>
+            <th>ACTIONS</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
+
         {{#each sites}}
         <tr>
             <td><a href="/sites/{{_id}}" style="font-size: large; font-weight: bolder; color:#009246 ">{{title}}</a></td>

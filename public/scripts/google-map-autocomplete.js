@@ -62,7 +62,7 @@ async function submitResponse() {
       },
       body: JSON.stringify({data:siteResponses})
 
-    });
+    }).then(window.location.href='/dashboard');
     const content = await rawResponse.json();
     return content; 
 }

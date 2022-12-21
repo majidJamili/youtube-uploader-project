@@ -35,11 +35,12 @@ const {
   json,
   section,
   toUpperCase,
-  formatDate
+  formatDate,
+  editIcon
 } = require('./helpers/hbs')
 
 
-app.engine('.hbs', exphbs.engine({ helpers:{json, section, toUpperCase, formatDate}, defaultLayout: 'main', extname: '.hbs' }))
+app.engine('.hbs', exphbs.engine({ helpers:{json, section, toUpperCase, formatDate, editIcon}, defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', '.hbs');
 
 
@@ -82,7 +83,7 @@ app.use((req, res, next) => {
   res.locals.success = req.flash('success') || null
   res.locals.error = req.flash('error') || null
   res.locals.warning = req.flash('warning') || null
-  res.locals.GOOGLE_MAP_SECRETES = process.env.GOOGLE_MAP_KEY
+  res.locals.GOOGLE_MAP_SECRETES = process.env.GOOGLE_MAP_KEY || null
   next();
 })
 
