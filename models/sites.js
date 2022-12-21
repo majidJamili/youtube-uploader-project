@@ -28,6 +28,10 @@ const SiteSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Line'
     }], 
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
     createdAt:{
         type:Date, 
         default:Date.now

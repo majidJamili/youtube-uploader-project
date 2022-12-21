@@ -92,6 +92,7 @@ app.use((req, res, next) => {
 
 //Routes:
 app.use('/',require('./routes/index'));
+app.use('/auth', require('./routes/authentication'));
 app.use('/videos', require('./routes/videos'));
 app.use('/playlists', require('./routes/playlists'));
 app.use('/tasks', require('./routes/tasks'));
