@@ -64,6 +64,9 @@ function onYouTubeIframeAPIReady() {
 
 
 function onPlayerReady(event) {
+  console.log('input value', document.getElementById('end-time-input').max)
+
+  document.getElementById('end-time-input').max = player.getDuration(); 
     // console.log('event data'); 
     // console.log(event); 
   //document.getElementById('existing-iframe-example').style.borderColor = '#FF6D00';

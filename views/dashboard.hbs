@@ -1,10 +1,31 @@
-<h1>ies dashboard</h1>
-{{!-- <h3>Welcome {{name}}</h3> --}}
 
+<section>
+    <table>
+    <tr>
+        <th><h4>ies dashboard</h4></th>
+        <th>
+                    <div class="chip">
+                        <img src="{{img}}" alt="">
+                        <a href="#">Welcome Industrial Engineer,  {{name}}</a>
+                    </div>
+
+        </th>
+    </tr>
+</table>
+
+</section>
+<br>
+
+<section>
+    
 
 <a href="/sites/add" class="btn btn-float"    style="background-color:#009246 ;"> <i class="fa-solid fa-plus" style="font-family: 'Roboto', sans-serif;"> ADD SITE</i></a>
 <a href="/videos/upload"   class="btn btn-float" style="background-color:#CE2B37;">  ies studio</a>
 
+</section>
+<br>
+<br>
+<section>
 
 
 {{#if sites}}
@@ -12,6 +33,7 @@
     <thead>
         <tr>
             <th>SITE TITLE</th>
+            <th>ADDRESS</th>
             <th>DATE</th>
             <th>ACTIONS</th>
             <th></th>
@@ -22,6 +44,7 @@
         {{#each sites}}
         <tr>
             <td><a href="/sites/{{_id}}" style="font-size: large; font-weight: bolder; color:#009246">{{title}}</a></td>
+            <td>{{address}}</td>
             <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
             <td>
                 <a href="/sites/{{_id}}/edit" class="btn btn-float"    style="background-color:#009246 ;"     >
@@ -42,3 +65,8 @@
 {{else}}
 <p>You have not created any sites</p>
 {{/if}}
+</section>
+
+
+
+

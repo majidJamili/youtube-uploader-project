@@ -46,8 +46,11 @@ app.set('view engine', '.hbs');
 
 app.use(session({ secret: 'myflashmessagesession',
                             resave:false, 
-                            saveUninitialized:true,
-                            cookie: { maxAge: 60000 }}
+                            saveUninitialized:false,
+                            // cookie: { maxAge: 60000 }, 
+                            store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI}),
+
+                          }
                                            ));
 app.use(flash());
 
@@ -75,18 +78,27 @@ var Storage = multer.diskStorage({
     },
   });
 
+
+//Multer File Uploader: 
 var upload = multer({
     storage:Storage,
 }).single("file")
+//Passport Middlewares and Access Files: 
+app.use(passport.initialize());
+app.use(passport.session());
+require('./passport')(passport); 
+
+
+//Local Access Information, inclusing: Flash Msgs, Secretes, and User Information: 
 
 app.use((req, res, next) => {
   res.locals.success = req.flash('success') || null
   res.locals.error = req.flash('error') || null
   res.locals.warning = req.flash('warning') || null
   res.locals.GOOGLE_MAP_SECRETES = process.env.GOOGLE_MAP_KEY || null
+  res.locals.user = req.user || null
   next();
 })
-
 
 
 
@@ -103,5 +115,5 @@ app.use('/sites', require('./routes/sites'))
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
-    console.log("YOUTUBE PROJECT IS LISTENING ON PORT 3000");
+    console.log(`YOUTUBE PROJECT IS LISTENING ON PORT ${PORT}`);
 });

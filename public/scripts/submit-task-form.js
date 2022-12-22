@@ -155,14 +155,11 @@ function createDataResponsebyList() {
         timeUI.innerHTML = time.value;
         timeUI.classList.add('task-time');
         taskDIV.appendChild(timeUI);
-    
-
-
-
-
+        
          container.appendChild(taskDIV); 
          updateDragList()
          cleanTaskForm()
+         closeFlash()
 
     
     

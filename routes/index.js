@@ -3,6 +3,8 @@ const { default: mongoose } = require('mongoose');
 const passport = require('passport');
 const router = express.Router();
 const oAuth2Client = require('../config/middlewares'); 
+const { ensureAuth, ensureGuest } = require('../middlewares'); 
+
 const { google } = require('googleapis');
 const Site = require('../models/sites'); 
 const sites = require('../models/sites');
@@ -71,9 +73,21 @@ router.get('/google/callback', (req, res) => {
 
 
 
-router.get('/dashboard', async(req,res)=>{
-    const sites = await Site.find({}).lean()
-    res.render('dashboard',{sites:sites})
+router.get('/dashboard',ensureAuth, async(req,res)=>{
+    try {
+        console.log(req.user)
+        const sites = await Site.find({}).lean()
+        res.render('dashboard',{sites:sites, name: req.user.firstName, img: req.user.image})
+
+        
+    } catch (error) {
+        console.error(error)
+        res.render('error/500')
+        
+    }
+
+
+
 })
 
 

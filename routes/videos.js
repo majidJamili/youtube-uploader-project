@@ -99,8 +99,8 @@ router.post('/upload', async(req, res) => {
 
 
 })
-// Edit Videos: 
-// PUT: /videos/:id/edit
+// Edit VIDEO: 
+// PUT: /VIDEO/:ID/EDIT
 router.put('/:id/edit', async (req, res) => {
 
     try {
@@ -157,6 +157,7 @@ router.delete('/:id/delete', async (req, res) => {
         const id = req.params.id
         const isModal = !!req.body.modal
         const video = await Video.findById(id).lean()
+        console.log(video)
         if(!video){
             return res.render('error/404')
         }

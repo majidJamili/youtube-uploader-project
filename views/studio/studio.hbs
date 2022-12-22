@@ -36,6 +36,11 @@
                                     </div>
                     </div>
                     <br>
+                                <div class="right-container-aligned">
+                                    <a id="duration-secs">154'</a>
+                                    <a id="duration-mins">00:00:30</a>
+                                </div>        
+                                <br>
 
 
 
@@ -46,15 +51,18 @@
                         style="border: solid 4px #37474F">
                     </iframe> 
                     </div>
-                    <div class="tasks-disposal-panel">                    
+                    <div class="tasks-disposal-panel">
+            
                     </div>
 
                 <div class="video-control-panel">
                             <div class="control-panel-buttons">
-                                <div class="left-container-aligned">
+
+                                <div class="right-container-aligned">
                                         <a href="#" id="add-task"><i class="fa-solid fa-thumbtack custom-icons green-icons"></i></a>
                                         <a href="#" id="stop-task"><i class="fa-solid fa-stop custom-icons red-icons"></i></a>
                                 </div>
+
                                 <div class="right-container-aligned">
                                         <a href="#" id="seek-back"><i class="fa-solid fa-backward custom-icons"></i></a>
                                         <a href="#" id="play"><i class="fa-solid fa-circle-play custom-icons"></i></a>
@@ -69,21 +77,20 @@
                                 <div class="task-form-container-t">
                                                 <form action="/tasks/add/id" method="POST" id="task_form_studio">
                                                     <input placeholder="TASK TITLE" name="title" id="task-title" type="text" class="validate">
-
                                                     <input type="hidden" id="video-link" name="url" value="" id="task-video-url">
-                              
-
-                    
-                                                    <select class="form-select" id="task-type" >
-                                                    {{#each types}}
-                                                        <option value="{{this}}">{{ toUpperCase this }}</option>
-                                                    {{/each}}
+                                                    <select class="form-select" id="task-type"  style="display: block;">
+                                                        {{#each types}}
+                                                            <option value="{{this}}">{{ toUpperCase this }}</option>
+                                                        {{/each}}
                                                     </select>
+
                                                     
 
 
                                                 <input placeholder="Start Time" id="start-time-input" name="task[start]" type="number">
                                                 <input placeholder="End Time" id="end-time-input" name="task[end]" type="number">
+                                                <p id="" ></p>
+                                                <label for="end-time-input" id="end-time-warning" style="color:  #bf1806;"></label>
                                                 <br>
                                                 <div class="span-two">
                                                     <button type="button" class="button btn-floating btn-large green" onclick="createDataResponsebyList()"><i

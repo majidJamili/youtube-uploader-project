@@ -2,14 +2,17 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios'); 
 const Site = require('../models/sites'); 
+const {ensureAuth}=require('../middlewares'); 
 
 
 //GET SITE INDEX PAGE
 // @GET /sites/ 
-router.get('/',async (req, res) => {
+router.get('/',ensureAuth,async (req, res) => {
     try {
-        const sites = await Site.find({}).lean()
-        console.log(process.env.GOOGLE_MAP_KEY)
+        const sites = await Site.find({})
+        .sort({createdAt:'desc'})
+        .populate('user')
+        .lean()
         res.render('sites/index', {sites: sites})
 
     } catch (error) {
@@ -24,7 +27,7 @@ router.get('/',async (req, res) => {
 //GET ADD SITE FORM
 // @GET /sites/add
 
-router.get('/add', (req, res) => {
+router.get('/add',ensureAuth, (req, res) => {
     res.render('sites/add')
 
 
@@ -34,15 +37,23 @@ router.get('/add', (req, res) => {
 // @GET /sites/:id
 
 
-router.get('/:id',async (req, res) => {
+router.get('/:id',ensureAuth, async (req, res) => {
     try {
 
-        var site = await Site.findById(req.params.id).lean()
+        var site = await Site.findById(req.params.id).populate('user').lean()
 
         if (!site) {
             return res.render('error/404')
         }
-        res.render('sites/show', {site: site })
+
+        if(site.user._id != req.user.id ){
+            res.render('error/404')
+
+        }else{
+            res.render('sites/show', {site: site })
+
+
+        }
 
     } catch (error) {
         console.error(error)
@@ -54,10 +65,8 @@ router.get('/:id',async (req, res) => {
 
 
 
-//GET ADD FORM SITE: 
-
-
-
+//GET ADD FORM SITE:
+//
 router.post('/getaddress', (req,res)=>{
 
     console.log(req.body)
@@ -82,9 +91,9 @@ router.post('/getaddress', (req,res)=>{
 
 })
 
-//Show Edit Site:
+//Show Site Edit Page:
 //GET /sites/:id/edit
-router.get('/:id/edit', async(req,res)=>{
+router.get('/:id/edit',ensureAuth, async(req,res)=>{
     try {
         const id = req.params.id; 
         const site = await Site.findById(id).lean()
@@ -103,9 +112,9 @@ router.get('/:id/edit', async(req,res)=>{
 
 
 
-// Edit Sites:
-// PUT: /edit
-router.put('/edit', async(req, res) => {
+//EDIT SITE
+// @ ROUTE PUT/SITES/EDIT
+router.put('/edit',ensureAuth,  async(req, res) => {
     console.log(req.body);
     const id = req.body.id; 
     const data = req.body.data; 
@@ -117,14 +126,12 @@ router.put('/edit', async(req, res) => {
 })
 
 
-//GET Show add
-
-
-
-
-//CREATE
-router.post('/add', async(req, res) => {
+//CREATE SITE
+//@ROUTE POST /SITES/ADD
+router.post('/add',ensureAuth,  async(req, res) => {
     try {
+
+        req.body.data.user = req.user.id
         await Site.create(req.body.data)
         console.log('new site created successfully')
 
@@ -141,7 +148,7 @@ router.post('/add', async(req, res) => {
 
 //DELETE SITE: 
 //@ DELETE /sites/:id
-router.delete('/:id', async(req,res)=>{
+router.delete('/:id',ensureAuth, async(req,res)=>{
     try {
         var site = await Site.findById(req.params.id).lean()
         if(!site){
