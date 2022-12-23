@@ -36,7 +36,7 @@ router.get('/index', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
     const video = await Video.findById(id).lean()
-    res.render('studio/studio', { video, types })
+    res.render('studio/studio', {layout:'studio', video, types })
 })
 
 
