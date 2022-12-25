@@ -1,92 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap');
+
+
 :root {
-    --main-radius: 5px;
+    --main-radius: .5rem;
     --main-padding: 5px;
+    --main-full-margin: 1px; 
+    --main-full-padding: 15px; 
+    --main-background: #ffffff;
+    --main-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   
   body {
-    font-family: "Inter", sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
-  
-  .container {
+
+  iframe{
+      border: solid 0px #8d9092;
+      border-radius:1rem;   
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+.container-studio{
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
     display: grid;
     height: 100vh;
-    grid-template-columns: 0.375fr .5fr 1.5fr;
-    grid-template-rows: 0.2fr 1.5fr 1fr 1fr 0.2fr;
+    grid-template-columns: 0.5fr .5fr 1.5fr;
+    grid-template-rows: .3fr 1fr 1.5fr 0.3fr 0.7fr;
     grid-template-areas:
       "nav nav nav"
-      " taskbar toolbar main"
-      " taskbar sidebar main"
-      "taskbar sidebar main"
-      "bin sidebar footer ";
+      "taskbar infobar main"
+      "taskbar toolbar main"
+      "taskbar toolbar player"
+      "bin toolbar controlbar";
     grid-gap: 0.2rem;
     font-weight: 800;
     text-transform: uppercase;
     font-size: 12px;
-    color: #004d40;
+    color: #010b09;
     text-align: center;
+    gap: 0.2rem;
   }
   
   nav {
-    background: #a7ffeb;
+    background: var(--main-background) !important;
+    box-shadow: var(--main-shadow);
     grid-area: nav;
+
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  #info-bar{
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    grid-area: infobar;
+    border-radius: var(--main-radius);
+    /* padding-top: var(--main-padding); */
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* grid-template-columns: 1fr ; */
+
+
+  }
+  #info-bar li{
+    border-bottom: 1px solid rgb(182, 181, 181);
+    border-bottom-width: thin;
+  }
+
+  #info-bar img{
+
+    justify-self: center;
   }
   
   main {
-    background: #84ffff;
+
     grid-area: main;
+    padding-top: var(--main-padding);
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    border-radius: 1rem; 
+
+    display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-around;
+      align-content: center;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding-top: 56.26%;
+  }
+  .responsive-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #control-bar {
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    grid-area: controlbar;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
   }
-  
   #sidebar {
-    background: #18ffff;
-    grid-area: sidebar;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
-  }
-  #taskbar {
-    background: #4f8686;
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+        grid-area: sidebar;
+        border-radius: var(--main-radius);
+        padding-top: var(--main-padding);
+      }
+  #task-bar{
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
     grid-area: taskbar;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
-  }
+
+  }   
   #toolbar{
-    background: #202121;
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
     grid-area: toolbar;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
 
   }
   
-  #content1 {
-    background: #6fffd2;
-    grid-area: content1;
+  #player {
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    grid-area: player;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
+
+    display: grid;
+    grid-template-columns: 0.15fr 1fr .15fr ;
+    flex-wrap: wrap;
+    justify-content: center;
+
+  }
+
+  .column-right{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+  }
+  .column-left{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .row-left{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
   }
   
   #content2 {
-    background: #64ffda;
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
     grid-area: content2;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
   }
+
   
   #content3 {
-    background: #73ffba;
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
     grid-area: content3;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
   }
   #bin{
-    background: #048142;
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
     grid-area: bin;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
   }
   
   footer {
-    background: #1de9b6;
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
     grid-area: footer;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
@@ -102,17 +210,19 @@
   }
   
   @media only screen and (max-width: 550px) {
-    .container {
+    .container-studio {
       grid-template-columns: 1fr;
-      grid-template-rows: 0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr 1fr;
+      grid-template-rows: 1fr 1.5fr 2fr 1.2fr 1.2fr 1.2fr 1.2fr 1.2fr;
       grid-template-areas:
-        "nav"
-        "sidebar"
-        "main"
-        "content1"
-        "content2"
-        "content3"
-        "footer";
+      "nav"
+      "infobar"
+      "main"      
+      "player"
+      "taskbar"
+      "bin"
+      "controlbar"
+      "toolbar" 
+      ;
     }
   }
   

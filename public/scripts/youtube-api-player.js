@@ -1,3 +1,4 @@
+console.log('youtube API connected')
 var tag = document.createElement('script');
 tag.id = 'iframe-demo';
 tag.src = 'https://www.youtube.com/iframe_api';
@@ -97,6 +98,19 @@ function getOnreadyStatus(event){
 function onPlayerStateChange(event) {
   changeBorderColor(event.data);
 }
+
+
+const endTime = document.getElementById('end-time-input'); 
+
+endTime.addEventListener('input', function(e){
+  var max = parseInt(endTime.max); 
+  if(parseInt(endTime.value)> max){
+      endTime.value = max; 
+      document.getElementById('end-time-warning').innerHTML = 'END TIME EXCEEDS VIDEO DURATION'
+  }else{
+      document.getElementById('end-time-warning').innerHTML = ''
+  }
+})
 
 
 

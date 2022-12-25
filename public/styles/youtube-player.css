@@ -56,12 +56,16 @@ body {
 
 }
 .video-panel  i{
-    color:  #4e4e4e;
+    color:  #0f0f0f;
 }
 
 
 .task-panel{
     background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 .studio-playlist{
     background-color: rgb(255, 255, 255);
@@ -77,14 +81,14 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         border: 1px solid #f3f3f3;
         border-radius: 5px;
-        background-color: #f3f3f3;
+        background-color: #0f0f0f;
     grid-template-columns: repeat(2, minmax(3rem, auto)); 
     margin: 10px;
     padding: 5px;
 }
 
 .control-panel-buttons i{
-color:#4e4e4e; 
+color:#030303; 
 }
 .left-container-aligned a{
     margin-left: 15px;
@@ -99,9 +103,9 @@ color:#4e4e4e;
 }
 
 
-.studio-tools{
+/* .studio-tools{
 
-}
+} */
 
 .left-container-aligned{
     position: relative;
@@ -143,25 +147,26 @@ color:#4e4e4e;
     align-items: center;
 }
 .task-form-panel {
-    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
-
-    border: 1px #f2f2f2 solid;
-    border-radius: 5px;
-    background-color: #f3f3f3;
-
-    border-radius: 5px;
-    margin: 10px;
-    padding: 5px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns:repeat(2,5fr);
 }
 
 .custom-icons{
     font-size: 28px;
-    color: aliceblue;
+    color: rgb(96, 82, 82);
 }
 .close-btn-panel{
     position: relative;
     top:15px; 
     left: 45%;
+    font-size: 24px;
+    color: #CE2B37;
+}
+.close-btn-panel-new{
+    position: relative;
+    top: 2px;
+
     font-size: 24px;
     color: #CE2B37;
 }
@@ -183,15 +188,19 @@ color:#4e4e4e;
 }
 
 .green-icons{
+    font-size: 34px;
     color: #009246 !important; 
 }
 
 .red-icons{
+    font-size: 34px;
+
     color: #CE2B37 !important;
 }
 
 .span-two {
     grid-column: span 2;
+    justify-self: center;
 }
 #myFlashCardSecond{
     display: none;
@@ -199,6 +208,13 @@ color:#4e4e4e;
 }
 #myFlashCard {
     display: none;
+}
+
+#closeButton{
+
+
+    font-size: 24px;
+    color: #CE2B37;
 }
 
 .form-select{
@@ -214,7 +230,7 @@ color:#4e4e4e;
      min-height: 10rem;
 }
 .delete-drag-drop{
-    background-image: url("/icons/icons8-delete-trash-50.png") ;
+    background-image: url("/icons/factory-06.png");
 
     background-repeat: no-repeat;
     background-size: 2rem 2rem;
@@ -234,7 +250,6 @@ color:#4e4e4e;
     transition-delay: 0.5s;
 
 }
-
 .delete-drag-drop:hover{
     /* width: 30rem; */
     background-color: #CE2B37;
@@ -242,6 +257,26 @@ color:#4e4e4e;
 
 
 }
+
+
+.delete-drag-drop-new{
+    background-image: url("/icons/icons8-delete-trash-50.png") ;
+    background-repeat: no-repeat;
+    background-size: 4rem 4rem;
+    background-position: center;
+    
+
+}
+
+.delete-drag-drop-new:hover{
+    background-image: url("/icons/icons8-delete-trash-50.png") ;
+    background-repeat: no-repeat;
+    background-size: 6rem 6rem;
+    background-position: center;
+    
+
+}
+
 
 .delete-dragover-drop{
 
