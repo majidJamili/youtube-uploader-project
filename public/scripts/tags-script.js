@@ -1,4 +1,3 @@
-console.log("file contect is accessible");
 
 (function ($) {
     "use strict";

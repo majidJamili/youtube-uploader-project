@@ -6,10 +6,7 @@ const LineSchema = new mongoose.Schema({
         require:true, 
         trim:true
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
+
     body:{
         type:String, 
         require:true
@@ -20,7 +17,7 @@ const LineSchema = new mongoose.Schema({
     processTime:{
         type:Number
     },
-    tackt:{
+    takt:{
         type:Number
     },
     products:{
@@ -28,6 +25,14 @@ const LineSchema = new mongoose.Schema({
     },
     workcenters:{
         type:Array
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    site:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Site'
     },    
 
     createdAt:{

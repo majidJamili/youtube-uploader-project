@@ -1,0 +1,115 @@
+
+
+<section>
+    <table>
+    <tr>
+        <th><h4>MANUFACTURING LINES AT {{site.title}} SITE</h4></th>
+        <th>
+            <img src="/icons/conveyor.png" alt="" width="100" height="100">
+        </th>
+        <th>
+            <div class="chip">
+              <img src="{{img}}" alt="">
+              <a href="#">Welcome Industrial Engineer,  {{name}}</a>
+            </div>
+        </th>
+
+    </tr>
+</table>
+
+</section>
+<br>
+
+
+
+
+<ul class="search-form">
+    <li>    
+        <form id="search-site"  action='/sites/{{site._id}}/lines/search/:query' method='get'>
+            <div class="input-group">
+                    <i class="fas fa-search fa-large" ></i>
+                    <div class="input-field">
+                    <input id="search" type="search" name='query' placeholder="Search by title">
+                    <label class="label-icon" for="search">
+                    </label>
+                 </div>
+                    <button type="submit" class="input-group-addon btn" style="background-color:#009246 ;">search</button> 
+                    <a href="/sites/{{site._id}}/lines/add" class="btn btn-float"    style="background-color:#009246 ;"> <i class="fa-solid fa-plus" style="font-family: 'Roboto', sans-serif;"> ADD LINE</i></a>
+                    <a href="/videos/upload"   class="btn btn-float" style="background-color:#CE2B37;">  ies studio</a>
+
+
+
+            </div>
+
+        </form>  
+    </li>   
+</ul>
+
+
+
+
+
+
+
+<section>
+    
+
+
+</section>
+<br>
+<br>
+<section>
+
+
+
+
+{{#if site}}
+<table class="striped">
+    <thead>
+        <tr>
+            <th>SITE TITLE</th>
+            <th>TYPE</th>
+            <th>DATE</th>
+            <th>ACTIONS</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each site}}
+                {{#each lines}}
+
+                <p>title: {{title}}</p>
+                {{/each}}
+
+        {{/each}}
+
+
+        {{#each site.lines}}
+        <tr>
+            <td><a href="/sites/{{../site._id}}/lines/{{_id}}" style="font-size: large; font-weight: bolder;">{{title}}</a></td>
+            <td>{{this.status}}</td>
+            <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+            <td>
+                <a href="/sites/{{../site._id}}/lines/{{_id}}/edit" class="btn btn-float"    style="background-color:#009246 ;"     >
+                    <i class="fas fa-edit"></i>
+                </a>
+
+                <form action="/sites/{{../site._id}}/lines/{{_id}}?_method=DELETE" method="POST" id="delete-form">
+                    
+                    <button type="submit" class="btn" style="background-color:#CE2B37;">
+                        <i class="fas fa-trash" ></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>You have not created any sites</p>
+{{/if}}
+</section>
+
+
+
+

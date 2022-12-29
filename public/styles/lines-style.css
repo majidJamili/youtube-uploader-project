@@ -1,0 +1,14 @@
+.row-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+.custom-editor-wrapper{
+    border: 1px solid #ccc;
+    padding: 4px;
+    margin: 1rem;
+
+    border-radius: 4px;
+    box-shadow: 0 3px 0px -1px rgba(0, 0, 0, .05);
+
+}

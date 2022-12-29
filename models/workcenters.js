@@ -17,19 +17,20 @@ const WorkcenterSchema = new mongoose.Schema({
         type:Number
     },
 
-    tackt:{
+    takt:{
         type:Number
     },
-    prodcut:{
+    prodcuts:[{
         type:Array
-    },
-    line:{
-        type:Array
-    },    
-    user:{
+    }],
+    line:[{
+        type:mongoose.Schema.Types.ObjectId, 
+        ref:'Line'
+    }],    
+    user:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
-    },   
+    }],   
 
     createdAt:{
         type:Date, 

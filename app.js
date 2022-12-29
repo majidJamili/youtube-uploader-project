@@ -108,7 +108,8 @@ app.use('/auth', require('./routes/authentication'));
 app.use('/videos', require('./routes/videos'));
 app.use('/playlists', require('./routes/playlists'));
 app.use('/tasks', require('./routes/tasks'));
-app.use('/sites', require('./routes/sites'))
+app.use('/sites', require('./routes/sites'));
+app.use('/sites/:siteId/lines', require('./routes/lines'))
 
 
 
