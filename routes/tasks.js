@@ -2,11 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Task = require('../models/tasks'); 
 const Video = require('../models/videos'); 
+const types =  ['Value-adding', 'Non-value-adding', 'Essential', 'Allowed Wait', 
+'Transport','Waste']
 
-const BSON = require('bson'); 
 
-router.get('/', (req, res) => {
-    res.send('you got access to tasks')
+
+
+//@ desc: GET Task add form
+//@route: /lines/:lineId/tasks/add
+
+router.get('/add', (req, res) => {
+    const lineId = req.params.    
+    res.render('tasks/add', {types:types})
 
 })
 

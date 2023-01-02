@@ -1,4 +1,11 @@
 
+function submitEditForm(){
+    const form = document.getElementById('edit-form-collapsible'); 
+
+    form.submit(); 
+    document.getElementById("myFlashCardSecond").style.display = "none"; 
+}
+
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }

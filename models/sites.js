@@ -1,5 +1,6 @@
 const mongoose = require('mongoose'); 
 const Schema = mongoose.Schema;
+const Line = require('../models/lines'); 
 
 const SiteSchema = new mongoose.Schema({
     title:{
@@ -37,5 +38,14 @@ const SiteSchema = new mongoose.Schema({
         default:Date.now
     }
 })
-
+//Delets all lines if we delete the site 
+SiteSchema.post('findOneAndDelete', async function (doc) {
+    if (doc) {
+        await Line.deleteMany({
+            _id: {
+                $in: doc.lines
+            }
+        })
+    }
+})
 module.exports= mongoose.model('Site', SiteSchema); 

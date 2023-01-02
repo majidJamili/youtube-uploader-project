@@ -44,8 +44,8 @@ router.get('/:id', async (req, res) => {
 
 
 
-//Upload a Video: 
-//POST: /videos/upload
+//@ desc: Upload a Video: 
+//@ route POST:/videos/upload
 router.post('/upload', async(req, res) => {    
 
 
@@ -54,12 +54,14 @@ router.post('/upload', async(req, res) => {
             console.log(err); 
             return res.send('Something went wrong'); 
         }else{
+            console.log('req body video', req.body.video)
             const title = req.body.video.title;
             const description = req.body.video.description; 
             const tags = req.body.video.tags; 
             const status = req.body.video.status; 
             youtube.videos.insert({
                     resource: {
+                        // id: "",
                         snippet: {
                             title: title,
                             description: "description",
@@ -80,6 +82,7 @@ router.post('/upload', async(req, res) => {
                         // res.render('error/404');
                         next(); 
                     } else if (data) {
+                        console.log('video upload', data.data)
 
                             await Video.create({'title':title, 'status': status, 'youtube_video_url': data.data.id, 'description':description, 'tasks':[] })
                             //res.redirect('/videos/upload')

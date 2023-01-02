@@ -120,12 +120,12 @@
       {{!-- EDIT FORM --}}
       <div class="task-form-panel" id="myFlashCardSecond">
         <div class="row-left">
-          <button type="submit" class="btn-floating waves-effect waves-light btn green"><i class="fa-solid fa-pen"></i></button>
+          <button type="submit" onclick="submitEditForm()" class="btn-floating waves-effect waves-light btn green"><i class="fa-solid fa-pen"></i></button>
           <a href="#" onclick="closeFlashSec()"><i class="fa-solid fa-circle-xmark close-btn-panel-new" ></i></a>
         </div>
       
       
-            <form action="/videos/{{video._id}}/edit?_method=PUT" method="POST" class="col">
+            <form action="/videos/{{video._id}}/edit?_method=PUT" method="POST" class="col" id="edit-form-collapsible">
               <input type="text" id="title" name="title" value="{{video.title}}">
                 <select id="status" name="status">
                   <option value="private" >Private</option>

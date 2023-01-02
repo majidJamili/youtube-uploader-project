@@ -1,4 +1,5 @@
-const moment = require('moment'); 
+const moment = require('moment');
+const Handlebars = require('handlebars'); 
 
 module.exports = {
     json: function(obj) {
@@ -15,6 +16,11 @@ module.exports = {
     formatDate: function (date, format) {
         return moment(date).utc().format(format)
     },
+    bold:function(text){
+      var result = "<b>" + Handlebars.escapeExpression(text) + "</b>";
+      return new Handlebars.SafeString(result);
+    },
+
     editIcon: function (storyUser, loggedUser, storyId, floating = true) {
         if (storyUser._id.toString() == loggedUser._id.toString()) {
           if (floating) {

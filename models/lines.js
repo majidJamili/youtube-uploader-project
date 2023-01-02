@@ -26,6 +26,10 @@ const LineSchema = new mongoose.Schema({
     workcenters:{
         type:Array
     },
+    videos:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Video'
+    }],
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
@@ -33,8 +37,13 @@ const LineSchema = new mongoose.Schema({
     site:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Site'
-    },    
-
+    },  
+    youtube_playlist_channel_id:{
+        type:String
+    },
+    youtube_playlist_id:{
+        type:String
+    },
     createdAt:{
         type:Date, 
         default:Date.now

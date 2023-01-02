@@ -36,11 +36,12 @@ const {
   section,
   toUpperCase,
   formatDate,
+  bold,
   editIcon
 } = require('./helpers/hbs')
 
 
-app.engine('.hbs', exphbs.engine({ helpers:{json, section, toUpperCase, formatDate, editIcon}, defaultLayout: 'main', extname: '.hbs' }))
+app.engine('.hbs', exphbs.engine({ helpers:{json, section, toUpperCase, formatDate,bold, editIcon}, defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', '.hbs');
 
 
@@ -109,7 +110,8 @@ app.use('/videos', require('./routes/videos'));
 app.use('/playlists', require('./routes/playlists'));
 app.use('/tasks', require('./routes/tasks'));
 app.use('/sites', require('./routes/sites'));
-app.use('/sites/:siteId/lines', require('./routes/lines'))
+app.use('/sites/:siteId/lines', require('./routes/lines'));
+// app.use('/lines/:lineId/tasks', require('./routes/tasks'));
 
 
 

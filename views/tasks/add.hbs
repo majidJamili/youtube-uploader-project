@@ -1,0 +1,37 @@
+            <div class="task-form-container-t">
+                        <form action="/tasks/add/id" method="POST" id="task_form_studio">
+                            <div class="span-two">
+                              <input placeholder="ACTIVITY TITLE" name="title" id="task-title" type="text" class="validate">
+                            </div>
+                            <br>
+                          <input type="hidden" id="video-link" name="url" value="" id="task-video-url">
+                            <div class="span-two">
+                            <select class="form-select" id="task-type"  style="display: block;">
+                                {{#each types}}
+                                  <option value="{{this}}">{{ toUpperCase this }}</option>
+                                {{/each}}
+                            </select>
+
+                            </div>
+                            <div class="span-two">
+                              <input placeholder="Start Time" id="start-time-input" name="task[start]" type="number">
+
+
+                            </div>
+                            <div class="span-two">
+                                                        <input placeholder="End Time" id="end-time-input" name="task[end]" type="number">
+                          <label for="end-time-input" id="end-time-warning" style="color:  #bf1806;"></label>
+                              
+                            </div>
+                      
+
+              
+                                             
+
+                          <br>
+                          <div class="span-two">
+                          <button type="button" class="button btn-floating btn-large green" onclick="createDataResponsebyList()"><i
+                                                            class="fa-solid fa-file-circle-plus"></i></button>
+                          </div>
+                        </form>
+              </div>

@@ -24,8 +24,8 @@ router.get('/list', async(req,res)=>{
 
 
 
-// Create Playlist
-//Posts /playlists/create
+//@desc: Create Playlist
+//@route POST:/playlists/create
 router.post("/create", async (req, res) => {
     const youtube = google.youtube({ version: "v3", auth: oAuth2Client });
 
@@ -82,8 +82,8 @@ router.put('/:id/edit', async (req, res) => {
     )
     res.redirect('/')
 })
-// Delete Playlist
-// DELETE playlists/:id/delete
+//@ desc: Delete Playlist
+//@ route DELETE: playlists/:id/delete
 router.delete('/:id/delete', (req, res) => {
     const youtube = google.youtube({ version: "v3", auth: oAuth2Client });
 

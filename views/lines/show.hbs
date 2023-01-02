@@ -1,16 +1,26 @@
+
 {{#each site.lines}}
 <div class="row">
     <div class="col s12 m8">
 
-                <h3>{{this.title}}
+        <h3>{{this.title}}
             {{!-- <small>{{{editIcon story.user user story._id false}}}</small> --}}
         </h3>
+
+
+
+
+
         
 
 
         
         <div class="card story">
             <div class="card-content">
+                <a href="/sites/{{../site._id}}/lines/{{this._id}}/upload"   class="btn btn-float" style="background-color:#CE2B37;"><i class="fa-solid fa-upload"></i> Upload <i class="fa-brands fa-youtube"></i> </a>
+                <br>
+                <br>
+
                 <span class="card-title">{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</span>
 
 
@@ -34,3 +44,4 @@
 
 </div>
         {{/each}}
+

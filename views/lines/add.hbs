@@ -15,6 +15,14 @@
             <input class="form-control form-control-lg" type="text" placeholder="Title" name="title">
             <input class="form-control form-control-lg" type="number" placeholder="Total Process Time" name="processTime">
             <input class="form-control form-control-lg" type="number" placeholder="Takt Time" name="takt">
+        <div class="form-group">
+                <label for="products">'Select the privacy status of the Manufacturing Line, if you want to share this line information on this line you can pick 'Public Status'</label>
+                <select class="form-control" id="privacyStatus" name="privacyStatus">
+                    <option value="public">Public</option>
+                    <option value="private" selected>Private</option>
+
+                </select>
+            </div>
             <div class="form-group">
                 <label for="products">'Select Product(s) to Manufacture on the Line'</label>
                 <select multiple class="form-control" id="products" name="products">

@@ -1,0 +1,75 @@
+
+
+<h3><i class="fa-brands fa-youtube"></i> UPLOAD STUDIO </h3>
+<h5>UPLOAD A VIDEO TO {{bold line.title}}</h5>
+
+<div class="row">
+
+    <form action="/sites/{{site._id}}/lines/{{line._id}}/upload" method="POST" class="col s12" enctype="multipart/form-data">
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="title" name="video[title]" placeholder="TITLE">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <select id="status" name="video[status]">
+                    <option value="public" selected>Public</option>
+                    <option value="private">Private</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <input id="tags-input" type="text" class="form-control" name="video[tags]" data-role="tagsinput" placeholder="TAGS" />
+        </div>
+
+
+
+        <div class="row">
+            <div class="input-field">
+                <h5>DESCRIPTION</h5>
+                <textarea id="body" name="video[description]"></textarea>
+            </div>
+        </div>
+                {{!-- <input type="file" class="form-control" name="file" required id="" /> --}}
+        <div class="file-field input-field">
+            <div class="btn btn-large">
+                <span><i class="fa-regular fa-folder-open"></i></span>
+                <input type="file" name="file" required>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+
+
+        <div class="row col s2">
+            <button type="submit" class="btn green btn-floating btn-large">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </button>
+            <a href="/" class="btn orange btn-floating btn-large"><i class="fa-solid fa-ban"></i></a>
+        </div>
+    </form>
+</div>
+
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ]
+        });
+    </script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="/scripts/tags-script.js"></script>
+

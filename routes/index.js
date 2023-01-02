@@ -7,7 +7,7 @@ const { ensureAuth, ensureGuest } = require('../middlewares');
 
 const { google } = require('googleapis');
 const Site = require('../models/sites'); 
-const sites = require('../models/sites');
+const User = require('../models/users'); 
 
 
 var isAuthenticated = false;
@@ -19,14 +19,22 @@ const SCOPES = ['https://www.googleapis.com/auth/youtube.upload',
 
 
 
+oAuth2Client.on('tokens',(tokens)=>{
+    if(tokens.refresh_token){
+        console.log('refresh token: ',tokens.refresh_token); 
+    }else{
+        console.log('access token: ', tokens.access_token)
+    }
+
+})
 
 
-
-router.get('/',(req,res)=>{
+router.get('/',async(req,res)=>{
     if(!isAuthenticated){
         var url = oAuth2Client.generateAuthUrl({
             access_type:"offline",
-            scope:SCOPES
+            scope:SCOPES,
+            include_granted_scopes:true
         })
         res.render('login', { layout: 'login', url: url })
     }else{
@@ -34,21 +42,47 @@ router.get('/',(req,res)=>{
             auth:oAuth2Client,
             version:"v2"
         });
-        oauth2.userinfo.get( function(err,response){
+        oauth2.userinfo.get( async function(err,response){
             if (err) {
                 console.log(err);
             }else{
-                userName = response.data.name;
-                pic = response.data.picture;
-                req.flash('success','You are ready to upload a new vide... are you excited?!');
-                res.render('dashboard', {
-                    name:response.data.name,
-                    pic: response.data.picture,
-                });
+
+                const newUser = {
+                    googleId: response.data.id,
+                    displayName: response.data.name,
+                    firstName: response.data.given_name,
+                    lastName: response.data.family_name,
+                    image: response.data.picture,
+
+                }
+                try {
+                    let user = await User.findOne({googleId:response.data.id})
+                    if(!user){
+                        console.log('New User Created')
+                    let user = await User.create(newUser)
+                    console.log('new user', user) 
+                    }else{
+                        console.log('the user exists')
+                    }
+                    const sites = await Site.find({}).lean()
+
+                    res.render('dashboard', {
+                        sites:sites,
+                        name:user.displayName,
+                        img: user.image,
+                    });
+                    
+                } catch (error) {
+                    console.log(error)
+                }       
+               
+
             }
         });
     }
 });
+
+
 
 
 router.get('/google/callback', (req, res) => {
@@ -60,7 +94,7 @@ router.get('/google/callback', (req, res) => {
                 console.log(tokens);
             }else{
                 console.log("Successful Authentiacation");
-                //console.log(tokens);
+              
                 oAuth2Client.setCredentials(tokens);
                 isAuthenticated = true;
                 res.redirect("/");
@@ -75,8 +109,9 @@ router.get('/google/callback', (req, res) => {
 
 router.get('/dashboard',ensureAuth, async(req,res)=>{
     try {
-        console.log(req.user)
+        
         const sites = await Site.find({}).lean()
+      
         res.render('dashboard',{sites:sites, name: req.user.firstName, img: req.user.image})
 
         

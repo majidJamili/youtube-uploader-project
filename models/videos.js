@@ -14,6 +14,11 @@ const videosSchema = new Schema({
     youtube_video_url:{
         type:String
     },
+    lines:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Line'
+
+    }],
     description:{
         type:String
     },
