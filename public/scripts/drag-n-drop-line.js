@@ -1,19 +1,39 @@
+const draggables = document.querySelectorAll('.draggable'); 
+const containers = document.querySelectorAll('.container-line-dragndrop');
 
-console.log('drag n drop connected')
-function updateDragList() {
-  console.log('update draggables being called.. ')
-  var draggables = document.querySelectorAll('.draggable')
-  var containers = document.querySelectorAll('.container-studio-dragndrop')
-  draggables.forEach(draggable => {
-    draggable.addEventListener('dragstart', () => {
-      console.log(draggable)
-      draggable.classList.add('dragging')
-    })
-  
-    draggable.addEventListener('dragend', () => {
-      draggable.classList.remove('dragging')
-    })
+function setAttributes(element, attributes){
+          Object.keys(attributes).forEach(attr=>{
+            element.setAttribute(attr,attributes[attr]);
+          });
+        }
+
+
+
+
+draggables.forEach(draggable=>{
+  draggable.addEventListener('dragend', function(){ 
+    //const form = document.querySelector('form');
+    // form.requestSubmit(); 
+    if (form.requestSubmit) {
+      form.requestSubmit();
+    } else {
+      form.submit();
+    }
+  });
+})
+
+
+
+draggables.forEach(draggable => {
+  draggable.addEventListener('dragstart', () => {
+    draggable.classList.add('dragging')
   })
+
+  draggable.addEventListener('dragend', () => {
+    draggable.classList.remove('dragging')
+  })
+})
+
 containers.forEach(container => {
   container.addEventListener('dragover', e => {
     e.preventDefault()
@@ -40,14 +60,3 @@ function getDragAfterElement(container, y) {
     }
   }, { offset: Number.NEGATIVE_INFINITY }).element
 }
-
-
-}
-
-
-
-
-
-
-
-

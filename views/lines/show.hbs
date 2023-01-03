@@ -2,10 +2,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <link rel="stylesheet" href="/styles/youtube-player.css">
-<link rel="stylesheet" href="/styles/tasks-style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<link rel="stylesheet" href="/styles/tasks-style.css">
 <link rel="stylesheet" href="/styles/line-style.css">
+<link rel="stylesheet" href="/styles/tasks-style-line.css">
+
 
 
 
@@ -16,24 +16,31 @@
         <h4>MANUFCATURING LINE STUDIO</h4>
     </nav>
     <main> 
-        {{#each ../line.workcenters}}     
-              <div class="card-wc">
+      <div class="container-line-dragndrop">
+          {{#each ../line.workcenters}}     
+              <div class="card-wc draggable">
                     <div class="card-wc-title">
                         <h6>{{this.title}}</h6>
 
                             
                     </div>
-                    <div class="card-content-wc">
-                            {{this.body}}
+                    <div class="card-content-wc">                      
                           <a href="#">tack time: {{this.takt}}</a>
                           <a href="#">avg process time: {{this.processTime}}</a>
+                          <a href="#">activities</a>
                     </div>
-                    <div class="container">
-                        <div class="draggable">ACTIVITY</div>
+                    <div class="container-line-dragndrop" id="task-panel-container" style="height: 150px;">
+                        <div draggable="true" class="task draggable">
+                        <p>ACTIVITY</p> 
+                        <i class="fa-sharp fa-solid fa-circle"></i>
+                        <div class="class-time">120</div>
+                    </div>
+                        
 
                     </div>
                 </div>
         {{/each}}
+      </div>
     </main>
 
     <div id="title-bar">
@@ -75,6 +82,8 @@
 </div>
 
 {{#section 'script'}}
+    <script type="text/javascript" src="/scripts/drag-n-drop-line.js"></script>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="/scripts/google-graphs.js"></script>
 {{/section}}
