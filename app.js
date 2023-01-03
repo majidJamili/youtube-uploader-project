@@ -111,7 +111,7 @@ app.use('/playlists', require('./routes/playlists'));
 app.use('/tasks', require('./routes/tasks'));
 app.use('/sites', require('./routes/sites'));
 app.use('/sites/:siteId/lines', require('./routes/lines'));
-// app.use('/lines/:lineId/tasks', require('./routes/tasks'));
+app.use('/lines/:lineId/wc', require('./routes/workcenters'));
 
 
 

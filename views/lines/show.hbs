@@ -1,47 +1,91 @@
 
-{{#each site.lines}}
-<div class="row">
-    <div class="col s12 m8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <h3>{{this.title}}
-            {{!-- <small>{{{editIcon story.user user story._id false}}}</small> --}}
-        </h3>
-
-
+<link rel="stylesheet" href="/styles/youtube-player.css">
+<link rel="stylesheet" href="/styles/tasks-style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="/styles/tasks-style.css">
+<link rel="stylesheet" href="/styles/line-style.css">
 
 
 
-        
+  <div class="container-studio">
+            {{#each site.lines}}
+
+    <nav>
+        <h4>MANUFCATURING LINE STUDIO</h4>
+    </nav>
+    <main> 
+        {{#each ../line.workcenters}}     
+              <div class="card-wc">
+                    <div class="card-wc-title">
+                        <h6>{{this.title}}</h6>
+
+                            
+                    </div>
+                    <div class="card-content-wc">
+                            {{this.body}}
+                          <a href="#">tack time: {{this.takt}}</a>
+                          <a href="#">avg process time: {{this.processTime}}</a>
+                    </div>
+                    <div class="container">
+                        <div class="draggable">ACTIVITY</div>
+
+                    </div>
+                </div>
+        {{/each}}
+    </main>
+
+    <div id="title-bar">
+                {{!-- Title Bar --}}
+                <h3>{{this.title}}</h3>
+                <h6>in action since {{formatDate createdAt 'MMMM Do YYYY'}}</h6>
+                <h6>Site Created by {{../name}}</h6>
+              
+                <a href="/sites/{{../site._id}}">AT {{../site.title}} SITE</a>
 
 
-        
-        <div class="card story">
-            <div class="card-content">
-                <a href="/sites/{{../site._id}}/lines/{{this._id}}/upload"   class="btn btn-float" style="background-color:#CE2B37;"><i class="fa-solid fa-upload"></i> Upload <i class="fa-brands fa-youtube"></i> </a>
-                <br>
-                <br>
+      </div>
+      <div id="control-bar">
+        {{!-- {{CONTROL BAR}} --}}
+            <a href="/sites/{{../site._id}}/lines/{{this._id}}/upload"   ><i class="fa-solid fa-upload"></i> Upload <i class="fa-brands fa-youtube"></i> </a>    
+            <a href="/lines/{{this._id}}/wc/add"   ><i class="fa-solid fa-screwdriver"></i> create workcenter  </a>
 
-                <span class="card-title">{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</span>
-
-
-         
-
+      </div>
+    <div id="stat-bar">
+      {{!-- Task Bar --}}
+                <h3>THIS IS THE STAT BAR</h3>
 
 
-            </div>
-        </div>
-                <div class="card center-align">
-            <div class="card-content">
-                <span class="card-title">Site Created by {{../name}}
-
-                </span>
-                <img src="" class="circle responsive-img img-small">
-            </div>
-            <div class="card-action">
-            </div>
-        </div>
+    </div>
+    <div id="graph-bar"> 
+              {{!-- Graph --}}
+            <div id="graph-container" style="height: 600px;"></div>
     </div>
 
+    <div id="bin">
+      {{!-- bin --}}
+                <h3>THIS IS THE BIN</h3>
+
+
+    </div>
+         {{/each}}
+
+
 </div>
-        {{/each}}
+
+{{#section 'script'}}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="/scripts/google-graphs.js"></script>
+{{/section}}
+
+
+
+
+
+
+
+
+
+
 

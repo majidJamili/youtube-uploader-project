@@ -10,6 +10,7 @@ const fs = require('fs');
 const Line = require('../models/lines');
 const Site = require('../models/sites');
 const Video = require('../models/videos'); 
+const workcenters = require('../models/workcenters');
 
 
 
@@ -247,8 +248,14 @@ router.get('/:id',ensureAuth, async(req,res)=>{
 
     try {
         const lineId = req.params.id; 
-        // const line = await Line.findById(lineId); 
+        const line = await Line.findById(lineId)
+                    .populate({path:'workcenters'})
+                    .sort({createdAt:'desc'})
+                    .lean(); 
+
         const siteId = req.params.siteId;
+
+        
         const site = await Site.findById(siteId)
                         .populate({path:'lines', match:{_id: lineId}})
                         .populate({path:'user'})
@@ -256,7 +263,7 @@ router.get('/:id',ensureAuth, async(req,res)=>{
                         .lean()
    
 
-        res.render('lines/show', {site:site, name: req.user.firstName, img: req.user.image})
+        res.render('lines/show', {layout: "line",line:line, site:site, name: req.user.firstName, img: req.user.image})
 
         
     } catch (error) {

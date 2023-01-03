@@ -20,7 +20,7 @@ const WorkcenterSchema = new mongoose.Schema({
     takt:{
         type:Number
     },
-    prodcuts:[{
+    products:[{
         type:Array
     }],
     line:[{

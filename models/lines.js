@@ -23,9 +23,10 @@ const LineSchema = new mongoose.Schema({
     products:{
         type:Array
     },
-    workcenters:{
-        type:Array
-    },
+    workcenters:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Workcenter'
+    }],
     videos:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Video'

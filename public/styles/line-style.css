@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap');
+
+
+:root {
+    --main-radius: .5rem;
+    --main-padding: 1px;
+    --main-full-margin: .5rem; 
+    --main-full-padding: 15px; 
+    --main-background: #fcfcfc ;
+    --main-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+
+
+.container-studio{
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 0.75fr 0.25fr ;
+    grid-template-rows: .25fr .25fr .10fr 1fr 2fr 0.3fr;
+    grid-template-areas:
+      "nav nav"
+      "title-bar graph-bar"
+      "control-bar graph-bar"
+      "stat-bar graph-bar"
+      "main main"
+      "bin bin";
+    grid-gap: 0.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #010b09;
+    text-align: center;
+    gap: 0.2rem;
+  }
+  
+  nav {
+    color: black;
+    background: var(--main-background) !important;
+    box-shadow: var(--main-shadow);
+    grid-area: nav;
+    border-radius: var(--main-radius);
+
+
+  }
+  main{
+    grid-area: main;
+    padding-top: var(--main-padding);
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    border-radius: 1rem; 
+    display: flex;
+    flex-direction: row;
+
+
+  }
+  #control-bar{
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    grid-area: control-bar;
+    border-radius: var(--main-radius);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+  }
+  #title-bar{
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    grid-area: title-bar;
+    border-radius: var(--main-radius);
+    /* padding-top: var(--main-padding); */
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    /* grid-template-columns: 1fr ; */
+
+
+  }
+
+  #stat-bar{
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    grid-area: stat-bar;
+    border-radius: var(--main-radius);
+    /* padding-top: var(--main-padding); */
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* grid-template-columns: 1fr ; */
+  }
+  #graph-bar{
+
+
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    grid-area: graph-bar;
+    padding:0px 0px 0px 0px !important; 
+    margin: 0px 0px 0px 0px !important;
+    border-radius: var(--main-radius);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+  #main-line{
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    grid-area: main-line;
+    border-radius: var(--main-radius);
+    /* padding-top: var(--main-padding); */
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* grid-template-columns: 1fr ; */
+
+  }
+
+  #bin{
+    background: var(--main-background);
+    box-shadow: var(--main-shadow);
+    grid-area: bin;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+  }
+  .card-wc{
+    width: 15rem;
+    background: rgba(246, 246, 246, 0.2);
+    box-shadow: var(--main-shadow);
+    margin: var(--main-full-margin);
+
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+    
+  }
+  .card-wc-title{
+    padding: .25rem;
+    text-overflow: wrap;
+    min-height: 4rem;
+    color: white;
+    background:#CD212A;
+    width: 15rem;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+
+    border-radius: var(--main-radius);
+
+
+  }
+  
+
+  
+  a {
+    text-align: center;
+    display: block;
+
+    text-decoration: none;
+    margin: .5rem;
+    color: #3b3a3a;
+    font-weight: 400;
+
+  }
+  a .btn{
+    border-radius: var(--main-radius);
+
+  }
+  
+  @media only screen and (max-width: 550px) {
+    .container-studio {
+      grid-template-columns: 2fr;
+      grid-template-rows: .5fr .5fr 1.5fr 2fr 0.1fr;
+      grid-template-areas:
+      "nav"
+      "title-bar"
+      "main"
+      "control-bar"
+      "stat-bar"
+
+      "bin" ;
+    }
+  }
+  
