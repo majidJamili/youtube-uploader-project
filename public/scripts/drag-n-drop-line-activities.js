@@ -1,5 +1,5 @@
-const draggables = document.querySelectorAll('.draggable'); 
-const containers = document.querySelectorAll('.container-line-dragndrop');
+const draggablesACT = document.querySelectorAll('.draggable'); 
+const containersACT = document.querySelectorAll('.container-line-dragndrop');
 
 function setAttributes(element, attributes){
           Object.keys(attributes).forEach(attr=>{
@@ -10,23 +10,24 @@ function setAttributes(element, attributes){
 
 
 
-draggables.forEach(draggable=>{
-  draggable.addEventListener('dragend', function(){ 
-    //const form = document.querySelector('form');
-    // form.requestSubmit(); 
-    if (form.requestSubmit) {
-      form.requestSubmit();
-    } else {
-      form.submit();
-    }
-  });
-})
+// draggables.forEach(draggable=>{
+//   draggable.addEventListener('dragend', function(){ 
+//     //const form = document.querySelector('form');
+//     // form.requestSubmit(); 
+//     if (form.requestSubmit) {
+//       form.requestSubmit();
+//     } else {
+//       form.submit();
+//     }
+//   });
+// })
 
 
 
-draggables.forEach(draggable => {
+draggablesACT.forEach(draggable => {
   draggable.addEventListener('dragstart', () => {
     draggable.classList.add('dragging')
+    console.log('draggable parent', draggable.parentElement)
   })
 
   draggable.addEventListener('dragend', () => {
@@ -34,7 +35,7 @@ draggables.forEach(draggable => {
   })
 })
 
-containers.forEach(container => {
+containersACT.forEach(container => {
   container.addEventListener('dragover', e => {
     e.preventDefault()
     const afterElement = getDragAfterElement(container, e.clientY)

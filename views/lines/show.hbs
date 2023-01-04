@@ -16,13 +16,12 @@
         <h4>MANUFCATURING LINE STUDIO</h4>
     </nav>
     <main> 
-      <div class="container-line-dragndrop">
+        <div class="containerWC">
           {{#each ../line.workcenters}}     
-              <div class="card-wc draggable">
-                    <div class="card-wc-title">
-                        <h6>{{this.title}}</h6>
 
-                            
+              <div class="card-wc draggableWC" draggable="true">
+                    <div class="card-wc-title">
+                        <h6>{{this.title}}</h6>                            
                     </div>
                     <div class="card-content-wc">                      
                           <a href="#">tack time: {{this.takt}}</a>
@@ -38,9 +37,16 @@
                         
 
                     </div>
-                </div>
+              </div>
+                
+          
+    
         {{/each}}
-      </div>
+        </div>
+
+
+
+
     </main>
 
     <div id="title-bar">
@@ -72,7 +78,10 @@
 
     <div id="bin">
       {{!-- bin --}}
-                <h3>THIS IS THE BIN</h3>
+               
+                <div class="containerWC" style="height: 200px; width:600px">
+
+                </div>
 
 
     </div>
@@ -82,7 +91,9 @@
 </div>
 
 {{#section 'script'}}
-    <script type="text/javascript" src="/scripts/drag-n-drop-line.js"></script>
+    <script type="text/javascript" src="/scripts/drag-n-drop-line-workcenters.js"></script>
+
+    <script type="text/javascript" src="/scripts/drag-n-drop-line-activities.js"></script>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="/scripts/google-graphs.js"></script>
