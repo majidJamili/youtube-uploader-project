@@ -7,31 +7,24 @@ function setAttributes(element, attributes){
           });
         }
 
-
-
-
-// draggables.forEach(draggable=>{
-//   draggable.addEventListener('dragend', function(){ 
-//     //const form = document.querySelector('form');
-//     // form.requestSubmit(); 
-//     if (form.requestSubmit) {
-//       form.requestSubmit();
-//     } else {
-//       form.submit();
-//     }
-//   });
-// })
-
-
-
 draggablesACT.forEach(draggable => {
   draggable.addEventListener('dragstart', () => {
+    draggable.parentElement.parentElement.draggable=false
+    draggable.parentElement.classList.remove("container-line-dragndrop")
+
     draggable.classList.add('dragging')
-    console.log('draggable parent', draggable.parentElement)
+
   })
 
   draggable.addEventListener('dragend', () => {
     draggable.classList.remove('dragging')
+    draggable.parentElement.parentElement.draggable=true
+    draggable.parentElement.classList.add("container-line-dragndrop")
+
+
+
+
+
   })
 })
 
@@ -41,7 +34,9 @@ containersACT.forEach(container => {
     const afterElement = getDragAfterElement(container, e.clientY)
     const draggable = document.querySelector('.dragging')
     if (afterElement == null) {
+      console.log("draggable inclusions: ", draggable)
       container.appendChild(draggable)
+      
     } else {
       container.insertBefore(draggable, afterElement)
     }

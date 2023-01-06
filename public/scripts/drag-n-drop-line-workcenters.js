@@ -12,18 +12,6 @@ function setAttributes(element, attributes){
 
 
 
-// draggables.forEach(draggable=>{
-//   draggable.addEventListener('dragend', function(){ 
-//     //const form = document.querySelector('form');
-//     // form.requestSubmit(); 
-//     if (form.requestSubmit) {
-//       form.requestSubmit();
-//     } else {
-//       form.submit();
-//     }
-//   });
-// })
-
 
 
 draggablesWC.forEach(draggable => {

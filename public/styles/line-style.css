@@ -150,6 +150,11 @@
     padding-top: var(--main-padding);
     
   }
+  .containerWC{
+    display: flex;
+    flex-direction: row;
+}
+
   .card-wc-title{
     padding: .25rem;
     text-overflow: wrap;
