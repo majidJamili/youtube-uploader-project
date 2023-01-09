@@ -9,22 +9,14 @@ function setAttributes(element, attributes){
 
 draggablesACT.forEach(draggable => {
   draggable.addEventListener('dragstart', () => {
-    draggable.parentElement.parentElement.draggable=false
-    draggable.parentElement.classList.remove("container-line-dragndrop")
-
     draggable.classList.add('dragging')
 
   })
 
+
+
   draggable.addEventListener('dragend', () => {
     draggable.classList.remove('dragging')
-    draggable.parentElement.parentElement.draggable=true
-    draggable.parentElement.classList.add("container-line-dragndrop")
-
-
-
-
-
   })
 })
 
@@ -34,7 +26,7 @@ containersACT.forEach(container => {
     const afterElement = getDragAfterElement(container, e.clientY)
     const draggable = document.querySelector('.dragging')
     if (afterElement == null) {
-      console.log("draggable inclusions: ", draggable)
+
       container.appendChild(draggable)
       
     } else {

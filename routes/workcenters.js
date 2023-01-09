@@ -45,6 +45,24 @@ router.post('/add', ensureAuth, async(req,res)=>{
 })
 
 
+// @desc: get edit workcenter form
+// @route: POST /lines/:lineId/wc/edit
+router.get('/edit', ensureAuth, async(req,res)=>{
+    try {
+        const lineId = req.params.lineId;
+     
+        const line = await Line.findById(lineId).lean(); 
+
+        res.render('workcenters/edit',{line:line})
+        
+    } catch (error) {
+        console.log(error)
+        res.render('error/404', {errorDesc:error})
+        
+    }
+
+})
+
 
 
 module.exports = router; 

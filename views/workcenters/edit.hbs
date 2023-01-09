@@ -1,0 +1,83 @@
+
+      
+<br>
+<br>
+<div class="row">
+    <div class="row" style="display: flex; flex-direction: row;">
+        <div class="row">
+            <h3><i class="fa-solid fa-screwdriver"></i> EDIT WORKCENTER {{}}AT </h3>
+            <h4>{{{bold line.title}}} </h4>
+            
+        </div>
+            <img src="/icons/drilling.png" alt="" width="125" height="125">
+    </div>
+
+
+
+    <form action="/lines/{{line._id}}/wc/add" method="POST" class="col s12" id="site-form">
+
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="title" name="wc[title]" placeholder="TITLE" required>
+            </div>
+        </div>
+
+        <div class="row">           
+             <div class="custom-editor-wrapper">
+                    <textarea id="body" class="form-control" name="wc[body]"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="status" name="wc[status]" placeholder="STATUS" required>
+            </div>
+        </div>
+                <div class="row">
+            <div class="input-field">
+                <input type="number" id="processTime" name="wc[processTime]" placeholder="PROCESS TIME" required>
+            </div>
+        </div>
+            <div class="row">
+            <div class="input-field">
+                <input type="number" id="takt" name="wc[takt]" placeholder="TAKT" required>
+            </div>
+        </div>
+        {{!-- <div class="input-field col s12">
+            <select>
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+            </select>
+            <label>Materialize Select</label>
+        </div> --}}
+
+
+
+
+
+
+        <button type="submit" class="btn btn-floating btn-large" style="background-color: #008C45 !important;" onclick="">
+            <i class="fa-solid fa-screwdriver"></i>
+        </button>
+        <a href="/" class="btn btn-floating btn-large" style="background-color: #CD212A !important;"><i class="fa-solid fa-ban"></i></a>
+    </form>
+</div>
+
+
+
+{{#section 'script'}}
+<script src="https://cdn.tiny.cloud/1/xcgqiqnptaji1szgot4m4nros0fr304ypd7ppaw2pfxdk2bf/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+        selector: '#body',
+        skin: 'naked',
+        icons: 'small',
+        toolbar_location: 'bottom',
+        plugins: 'lists code table codesample link',
+        toolbar: 'blocks | fontfamily bold italic underline strikethrough bullist link',
+        menubar: false,
+        statusbar: false
+    });
+</script>
+{{/section}}

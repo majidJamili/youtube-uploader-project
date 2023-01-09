@@ -11,7 +11,20 @@ function setAttributes(element, attributes){
 
 
 
+function getWorkenterSequence(){
+  const lineContainer = document.getElementById('line-container'); 
+  for (let i = 0; i < lineContainer.children.length; i++) {
+    const element = lineContainer.children[i].children[0].children[0];
+    const sequence = lineContainer.children[i].children[0].children[1]; 
 
+    console.log('sequence', sequence)
+
+    sequence.innerHTML = i;
+    element.innerHTML = "WC" + i; 
+    
+  }
+
+}
 
 
 draggablesWC.forEach(draggable => {
@@ -21,6 +34,7 @@ draggablesWC.forEach(draggable => {
 
   draggable.addEventListener('dragend', () => {
     draggable.classList.remove('dragging')
+    getWorkenterSequence()
   })
 })
 
@@ -31,7 +45,7 @@ containersWC.forEach(container => {
     //console.log('e.clientY',e.clientY );
     const draggable = document.querySelector('.dragging')
     if (afterElement == null) {
-      container.appendChild(draggable)
+      container.appendChild("child nodes: ", draggable.childNodes)
     } else {
       container.insertBefore(draggable, afterElement)
     }

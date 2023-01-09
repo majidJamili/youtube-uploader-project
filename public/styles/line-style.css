@@ -159,17 +159,39 @@
     padding: .25rem;
     text-overflow: wrap;
     min-height: 4rem;
-    color: white;
-    background:#CD212A;
+    color: #008C45;
+    background:#ffffff;
     width: 15rem;
-    text-align: center;
-    align-content: center;
-    justify-content: center;
-
+    display: grid;
+    grid-template-columns: .125fr 1fr 0.125fr;
+    border: #008C45 1px solid;
     border-radius: var(--main-radius);
-
-
+    align-items: center;
   }
+  .card-wc-title h6{
+    text-align: start;
+  }
+  .card-wc-title a{
+    text-align: start;
+  }
+  .card-wc-title i{
+    font-size: 20px;
+    text-align: start;
+  }
+  .card-wc-title .order{
+    height: fit-content;
+    padding: 3px;
+    border: 1px solid #008C45;
+    border-radius: 5px;
+  }
+  /* .card-wc-title .card-wc-name{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+  } */
+  
   
 
   

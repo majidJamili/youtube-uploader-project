@@ -16,12 +16,19 @@
         <h4>MANUFCATURING LINE STUDIO</h4>
     </nav>
     <main> 
-        <div class="containerWC">
+
+        <div class="containerWC" id="line-container">
+
           {{#each ../line.workcenters}}     
 
               <div class="card-wc draggableWC" draggable="true">
                     <div class="card-wc-title">
-                        <h6>{{this.title}}</h6>                            
+                        <a class="order">WC1</a>
+                        <input type="hidden" class="sequence" value={{this.sequence}}>
+                        <h6>{{this.title}}</h6>
+                        <i class="fa-solid fa-circle"></i>                       
+
+                            
                     </div>
                     <div class="card-content-wc">                      
                           <a href="#">tack time: {{this.takt}}</a>
@@ -63,6 +70,8 @@
         {{!-- {{CONTROL BAR}} --}}
             <a href="/sites/{{../site._id}}/lines/{{this._id}}/upload"   ><i class="fa-solid fa-upload"></i> Upload <i class="fa-brands fa-youtube"></i> </a>    
             <a href="/lines/{{this._id}}/wc/add"   ><i class="fa-solid fa-screwdriver"></i> create workcenter  </a>
+             <a href="#" class="btn">UPDATE LINE</a>
+
 
       </div>
     <div id="stat-bar">
@@ -92,7 +101,7 @@
 
 {{#section 'script'}}
     <script type="text/javascript" src="/scripts/drag-n-drop-line-workcenters.js"></script>
-    <script type="text/javascript" src="/scripts/drag-n-drop-line-activities.js"></script>
+    {{!-- <script type="text/javascript" src="/scripts/drag-n-drop-line-activities.js"></script> --}}
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="/scripts/google-graphs.js"></script>
 {{/section}}

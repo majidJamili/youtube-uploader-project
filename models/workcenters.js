@@ -5,7 +5,8 @@ const WorkcenterSchema = new mongoose.Schema({
         type:String, 
         require:true, 
         trim:true
-    },    
+    },
+  
     body:{
         type:String, 
         require:true
@@ -30,8 +31,10 @@ const WorkcenterSchema = new mongoose.Schema({
     user:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
-    }],   
-
+    }],
+    sequence:{
+        type:Number
+    },
     createdAt:{
         type:Date, 
         default:Date.now
