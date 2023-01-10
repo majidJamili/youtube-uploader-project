@@ -5,8 +5,13 @@
 <div class="row">
     <div class="row" style="display: flex; flex-direction: row;">
         <div class="row">
-            <h3><i class="fa-solid fa-screwdriver"></i> EDIT WORKCENTER {{}}AT </h3>
-            <h4>{{{bold line.title}}} </h4>
+            
+            <h3>
+                <i class="fa-solid fa-screwdriver"></i>
+                <i class="fa-solid fa-pen-to-square"></i>
+                <br>
+                EDIT {{{bold wc.title}}} WORKCENTER AT {{line.title}} LINE
+            </h3>
             
         </div>
             <img src="/icons/drilling.png" alt="" width="125" height="125">
@@ -14,32 +19,32 @@
 
 
 
-    <form action="/lines/{{line._id}}/wc/add" method="POST" class="col s12" id="site-form">
+    <form action="/lines/{{line._id}}/wc/{{wc._id}}/edit?_METHOD=PUT" method="POST" class="col s12" id="site-form">
 
         <div class="row">
             <div class="input-field">
-                <input type="text" id="title" name="wc[title]" placeholder="TITLE" required>
+                <input type="text" id="title" name="wc[title]" placeholder="TITLE" value="{{wc.title}}" required>
             </div>
         </div>
 
         <div class="row">           
              <div class="custom-editor-wrapper">
-                    <textarea id="body" class="form-control" name="wc[body]"></textarea>
+                    <textarea id="body" class="form-control" name="wc[body]">{{wc.body}}</textarea>
             </div>
         </div>
         <div class="row">
             <div class="input-field">
-                <input type="text" id="status" name="wc[status]" placeholder="STATUS" required>
+                <input type="text" id="status" name="wc[status]" placeholder="STATUS" value="{{wc.status}}" required>
             </div>
         </div>
                 <div class="row">
             <div class="input-field">
-                <input type="number" id="processTime" name="wc[processTime]" placeholder="PROCESS TIME" required>
+                <input type="number" id="processTime" name="wc[processTime]" placeholder="PROCESS TIME" value="{{wc.processTime}}" required>
             </div>
         </div>
             <div class="row">
             <div class="input-field">
-                <input type="number" id="takt" name="wc[takt]" placeholder="TAKT" required>
+                <input type="number" id="takt" name="wc[takt]" placeholder="TAKT" value="{{wc.takt}}" required>
             </div>
         </div>
         {{!-- <div class="input-field col s12">
@@ -58,7 +63,7 @@
 
 
         <button type="submit" class="btn btn-floating btn-large" style="background-color: #008C45 !important;" onclick="">
-            <i class="fa-solid fa-screwdriver"></i>
+            <i class="fa-solid fa-pen-to-square"></i>
         </button>
         <a href="/" class="btn btn-floating btn-large" style="background-color: #CD212A !important;"><i class="fa-solid fa-ban"></i></a>
     </form>

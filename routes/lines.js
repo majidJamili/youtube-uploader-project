@@ -250,6 +250,7 @@ router.get('/:id',ensureAuth, async(req,res)=>{
         const lineId = req.params.id; 
         const line = await Line.findById(lineId)
                     .populate({path:'workcenters'})
+                    .populate({path:'user'})
                     .sort({createdAt:'desc'})
                     .lean(); 
 
@@ -261,9 +262,13 @@ router.get('/:id',ensureAuth, async(req,res)=>{
                         .populate({path:'user'})
                         .sort({createdAt:'desc'})
                         .lean()
-   
 
-        res.render('lines/show', {layout: "line",line:line, site:site, name: req.user.firstName, img: req.user.image})
+        res.render('lines/show', {layout: "line",
+                                                line:line, 
+                                                site:site,
+                                                user:req.user, 
+                                                name: req.user.firstName, 
+                                                img: req.user.image})
 
         
     } catch (error) {

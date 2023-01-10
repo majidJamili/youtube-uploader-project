@@ -29,6 +29,8 @@ router.post('/add', ensureAuth, async(req,res)=>{
     try {
         const line = await Line.findById(req.params.lineId).populate('site');
         req.body.wc.user = req.user.id; 
+        req.body.wc.line = await Line.findById(req.params.lineId); 
+        
         const wc = new Workcenter(req.body.wc); 
         line.workcenters.push(wc); 
         await wc.save();
@@ -45,15 +47,28 @@ router.post('/add', ensureAuth, async(req,res)=>{
 })
 
 
-// @desc: get edit workcenter form
-// @route: POST /lines/:lineId/wc/edit
-router.get('/edit', ensureAuth, async(req,res)=>{
+// @desc: Get edit workcenter form
+// @route: GET /lines/:lineId/wc/:wcId/edit
+router.get('/:wcId/edit', ensureAuth, async(req,res)=>{
     try {
-        const lineId = req.params.lineId;
-     
+        const siteId = req.params.siteId; 
+        const wcId = req.params.wcId;
+        const wc = await Workcenter.findOne({_id: wcId,}).lean()
+        const lineId = req.params.lineId;     
         const line = await Line.findById(lineId).lean(); 
+        console.log('wc: ', wc)
+        if (!wc) {
+            res.render('error/404')            
+        }
+        if (line.user != req.user.id) {
+            req.flash('error', 'Need to log in...')
+            res.redirect('/dashboard')
+        }else{
+            res.render('workcenters/edit',{line: line, wc:wc})
+        }
 
-        res.render('workcenters/edit',{line:line})
+
+
         
     } catch (error) {
         console.log(error)

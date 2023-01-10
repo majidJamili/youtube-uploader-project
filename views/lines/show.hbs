@@ -8,16 +8,18 @@
 
 
 
-
   <div class="container-studio">
             {{#each site.lines}}
 
     <nav>
         <h4>MANUFCATURING LINE STUDIO</h4>
+
     </nav>
     <main> 
 
         <div class="containerWC" id="line-container">
+                             
+
 
           {{#each ../line.workcenters}}     
 
@@ -34,6 +36,11 @@
                           <a href="#">tack time: {{this.takt}}</a>
                           <a href="#">avg process time: {{this.processTime}}</a>
                           <a href="#">activities</a>
+                          <div class="card-image">
+                                  {{{editIcon ../user ../this.user this._id }}}
+                          </div>
+                          <a href="/lines/{{../user._id}}/wc/{{this._id}}/edit">edit</a>
+
                     </div>
                     <div class="container-line-dragndrop" id="task-panel-container" style="height: 150px;">
                         <div draggable="true" class="task draggable">
@@ -60,9 +67,12 @@
                 {{!-- Title Bar --}}
                 <h3>{{this.title}}</h3>
                 <h6>in action since {{formatDate createdAt 'MMMM Do YYYY'}}</h6>
-                <h6>Site Created by {{../name}}</h6>
-              
+                <h6>Site Created by {{../name}}</h6>              
                 <a href="/sites/{{../site._id}}">AT {{../site.title}} SITE</a>
+                <div class="chip">
+                      <img src="{{../img}}" alt="">
+                      welcome {{../name}}
+                </div>
 
 
       </div>
@@ -76,25 +86,20 @@
       </div>
     <div id="stat-bar">
       {{!-- Task Bar --}}
-                <h3>THIS IS THE STAT BAR</h3>
-
-
+                <h6>THIS IS THE STAT BAR</h6>
     </div>
-    <div id="graph-bar"> 
-              {{!-- Graph --}}
-            <div id="graph-container" style="height: 600px;"></div>
-    </div>
+      <div id="graph-bar"> 
+                {{!-- Graph --}}
+              <div id="graph-container" style="height: 600px;"></div>
+      </div>
 
-    <div id="bin">
-      {{!-- bin --}}
-               
-                <div class="containerWC" style="height: 200px; width:600px">
+  {{/each}}
+        <div id="bin">
+        {{!-- bin --}}        
 
-                </div>
-
-
-    </div>
-         {{/each}}
+       
+                  <div class="containerWC" style="height: 200px; width:600px"></div>
+      </div>
 
 
 </div>
