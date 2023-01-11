@@ -45,15 +45,7 @@ router.get('/:id',ensureAuth, async (req, res) => {
         if (!site) {
             return res.render('error/404')
         }
-
-        if(site.user._id != req.user.id ){
-            res.render('error/404')
-
-        }else{
-            res.render('sites/show', {site: site })
-
-
-        }
+         res.render('sites/show', {site: site })        
 
     } catch (error) {
         console.error(error)

@@ -11,6 +11,7 @@ const Line = require('../models/lines');
 const Site = require('../models/sites');
 const Video = require('../models/videos'); 
 const workcenters = require('../models/workcenters');
+const { json } = require('../helpers/hbs');
 
 
 
@@ -264,9 +265,11 @@ router.get('/:id',ensureAuth, async(req,res)=>{
                         .lean()
 
         res.render('lines/show', {layout: "line",
-                                                line:line, 
+                                                line:line,
+                                                lineCreator: line.user,
+                                                workcenters: line.workcenters,
                                                 site:site,
-                                                user:req.user, 
+                                                loggedUser: req.user, 
                                                 name: req.user.firstName, 
                                                 img: req.user.image})
 

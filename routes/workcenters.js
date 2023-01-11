@@ -60,20 +60,15 @@ router.get('/:wcId/edit', ensureAuth, async(req,res)=>{
         if (!wc) {
             res.render('error/404')            
         }
-        if (line.user != req.user.id) {
+        if (wc.user != req.user.id) {
             req.flash('error', 'Need to log in...')
             res.redirect('/dashboard')
         }else{
             res.render('workcenters/edit',{line: line, wc:wc})
-        }
-
-
-
-        
+        }        
     } catch (error) {
         console.log(error)
-        res.render('error/404', {errorDesc:error})
-        
+        res.render('error/404', {errorDesc:error})        
     }
 
 })

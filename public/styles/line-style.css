@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap');
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 :root {
+    --red-colour: #CD212A;
+    --white-colour: #F4F9FF; 
+    --green-colour: #008C45; 
+    --grey-colour: rgb(97, 96, 98);
+    --icon-size: 20px; 
     --main-radius: .5rem;
     --main-padding: 1px;
     --main-full-margin: .5rem; 
@@ -13,6 +21,8 @@
   
   body {
     font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #00AAFF, #00FF6C);
+
   }
 
 
@@ -159,39 +169,131 @@
     padding: .25rem;
     text-overflow: wrap;
     min-height: 4rem;
-    color: #008C45;
+    color:var(--grey-colour);
     background:#ffffff;
     width: 15rem;
     display: grid;
     grid-template-columns: .125fr 1fr 0.125fr;
-    border: #008C45 1px solid;
+    grid-template-rows:repeat(2, minmax(0rem, auto)) ;
+    gap: 1rem;
+    grid-template-areas:
+
+    "num-c title-c status-c"
+    "takt-c capacity-c efficiency-c";
+    grid-gap: 0rem;
+    border:var(--grey-colour) 1px solid;
     border-radius: var(--main-radius);
     align-items: center;
+    align-content: center;
+    padding: 0px;
+    margin: 0;
+
   }
-  .card-wc-title h6{
+
+  .order{
+    grid-area:num-c;
+    height: fit-content;
+    padding: 3px;
+    border: 1px solid var(--grey-colour);
+    border-radius: 5px;
+  }
+  .takt-c{
+    margin-left: 3px;
+
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+
+  }
+  .takt-c a{
+
+    margin: 0px;
+    padding: 0px;
+
+  }
+  .card-wc-title-name{
+    grid-area: title-c;
     text-align: start;
+    color: var(--grey-colour);
+    font-weight: bold;
   }
+  #status-c{
+    grid-area: status-c;
+  }
+
+  .capacity-c{
+    grid-area: capacity-c;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+  }
+  .capacity-c a{
+    margin: 0px;
+    padding: 0px;
+  }
+
+
+  .efficiency-c{
+    grid-area: efficiency-c;
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+  }
+  .efficiency-c a{
+    margin: 0px;
+    padding: 0px;
+  }
+
   .card-wc-title a{
     text-align: start;
+    color: var(--grey-colour);
   }
   .card-wc-title i{
     font-size: 20px;
     text-align: start;
   }
-  .card-wc-title .order{
-    height: fit-content;
-    padding: 3px;
-    border: 1px solid #008C45;
-    border-radius: 5px;
-  }
-  /* .card-wc-title .card-wc-name{
-    display: flex;
+  .tool-c{
+    display:flex ;
+    top: 1px;
+
+    height: 1.5rem;
+    gap: .5rem;
+    width: fit-content;
     flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    gap: 10px;
-  } */
-  
+    padding-left: 1rem;
+    padding-top: .2rem;
+    margin: 0;
+  }
+  .tool-c a{
+    margin: 0;
+    padding: 0;
+  }
+
+  .tool-c #red{
+    color: var(--grey-colour);
+    font-size: var(--icon-size);
+  }
+  .tool-c #green{
+    color: rgb(97, 96, 98);
+    font-size: var(--icon-size);
+  }
+.buttons-bottom-bar{
+  position: sticky;
+  bottom:  1px;
+  right: 1px;
+  width: fit-content;
+  height: fit-content;
+
+}
   
 
   

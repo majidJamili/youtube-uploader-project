@@ -4,6 +4,22 @@
 <link rel="stylesheet" href="/styles/tasks-style.css">
 <link rel="stylesheet" href="/styles/studio-style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+          
+</script>
+
+
+
 
   <div class="container-studio">
     <nav>
@@ -75,7 +91,7 @@
 
                             </div>
                             <div class="span-two">
-                                                        <input placeholder="End Time" id="end-time-input" name="task[end]" type="number">
+                          <input placeholder="End Time" id="end-time-input" name="task[end]" type="number">
                           <label for="end-time-input" id="end-time-warning" style="color:  #bf1806;"></label>
                               
                             </div>
@@ -107,9 +123,35 @@
                                         <a href="#" id="seek-video"><i class="fa-solid fa-forward custom-icons "></i></a>
                                 </div>
                                 <div class="column-right">
+
+
                                   <a href="#" onclick="openFlashSec()">  <i class="fa-solid fa-pen-to-square custom-icons"></i></a>
                                   <a class="btn modal-trigger btn-floating red darken-2" href="#modal1"><i class="fa-solid fa-trash"></i></a>
-                                </div>                                   
+                                      <button data-target="modal1" class="btn modal-trigger">Modal</button>
+                                        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+                                    <!-- Modal Structure -->
+                                            <div id="modal1" class="modal">
+                                              <div class="modal-content">
+                                                <h4>Modal Header</h4>
+                                                <p>A bunch of text</p>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                                              </div>
+                                            </div>
+
+                                </div>
+                                                        <div id="modal1" class="modal" style="color: black; height: 150px">
+                            <div class="modal-content" style="color: black; height: 150px">
+                                <h5 style="color: black; height: 10px">CONFIRMATION</h5>
+                                <p style="color: black ;">Is it certainly necessary to delete this video?</p>
+                                <form method="POST" action="/videos/{{video._id}}/delete?_method=DELETE">
+                                    <button class="btn btn-floating red darken-3" name="modal" value="open"><i
+                                            class="fa-solid fa-trash orange-button"></i></button>
+                                </form>
+                            </div>
+                        </div>                                   
             
              
 
@@ -141,7 +183,6 @@
 
     </div>
 </div>
-
 
 
 

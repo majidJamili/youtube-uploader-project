@@ -20,19 +20,14 @@ module.exports = {
       var result = "<b>" + Handlebars.escapeExpression(text) + "</b>";
       return new Handlebars.SafeString(result);
     },
-    editIcon: function (wcUser, loggedUser, wcId, floating = true) {
-      console.log('Workstation Maker',wcUser.toString())
-      console.log('Logged User',loggedUser.toString())
-      console.log(loggedUser===wcUser)
-      console.log('wcId', wcId.toString())
-      // if (lineUser._id.toString() == loggedUser._id.toString()) {
-      //   if (floating) {
-      //     return `<a href="/lines/lineid/wc/" class="btn-floating halfway-fab blue"><i class="fas fa-edit fa-small"></i></a>`
-      //   } else {
-      //     return `<a href="/stories/edit/${wcId}"><i class="fas fa-edit"></i></a>`
-      //   }
-      // } else {
-      //   return ''
-      // }
+    editIcon: function (wcUser, loggedUser, wcId,lineId, floating = true) {
+      if (wcUser.toString() == loggedUser._id.toString()) {          
+          return ` <div class="tool-c">
+                      <a href='/lines/${lineId.toString()}/wc/${wcId.toString()}/edit' ><i class="fa-solid fa-pen-to-square" id="green"></i></a> 
+                      <a href='/lines/${lineId.toString()}/wc/${wcId.toString()}/delete' id="red"><i class="fa-solid fa-trash" id="red"></i></a>
+                      </div>`        
+      } else {
+        return ''
+      }
     },
 }

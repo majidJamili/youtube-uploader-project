@@ -9,77 +9,83 @@
 
 
   <div class="container-studio">
-            {{#each site.lines}}
+
+         
 
     <nav>
         <h4>MANUFCATURING LINE STUDIO</h4>
 
     </nav>
-    <main> 
-
+    <main>
         <div class="containerWC" id="line-container">
-                             
+              {{#each workcenters as |wc wcId| }} 
+                  <div class="card-wc draggableWC" draggable="true">
+
+                        <div class="card-wc-title">  
+                                <a class="order">WC{{wcId}}</a>
+                                <input type="hidden" class="sequence" value={{this.sequence}}>
 
 
-          {{#each ../line.workcenters}}     
-
-              <div class="card-wc draggableWC" draggable="true">
-                    <div class="card-wc-title">
-                        <a class="order">WC1</a>
-                        <input type="hidden" class="sequence" value={{this.sequence}}>
-                        <h6>{{this.title}}</h6>
-                        <i class="fa-solid fa-circle"></i>                       
-
-                            
-                    </div>
-                    <div class="card-content-wc">                      
-                          <a href="#">tack time: {{this.takt}}</a>
-                          <a href="#">avg process time: {{this.processTime}}</a>
-                          <a href="#">activities</a>
-                          <div class="card-image">
-                                  {{{editIcon ../user ../this.user this._id }}}
-                          </div>
-                          <a href="/lines/{{../user._id}}/wc/{{this._id}}/edit">edit</a>
-
-                    </div>
-                    <div class="container-line-dragndrop" id="task-panel-container" style="height: 150px;">
-                        <div draggable="true" class="task draggable">
-                        <p>ACTIVITY</p> 
-                        <i class="fa-sharp fa-solid fa-circle"></i>
-                        <div class="class-time">120</div>
-                    </div>
-                        
-
-                    </div>
-              </div>
-                
+                                <h6 class="card-wc-title-name">{{this.title}}</h6>
+                                <i class="fa-solid fa-circle" id="status-c"></i>
+                                {{!-- <div class="takt-c"><a href="">takt</a> <a href="">{{this.takt}}</a>   </div>
+                                <div class="efficiency-c"><a>EFF.</a> <a>56%</a>  </div>
+                                <div class="capacity-c"><a>capacity</a> <a>{{this.processTime}}</a> </div> --}}
+                        </div>
+                        <br>          
           
-    
-        {{/each}}
+                        <div class="container-line-dragndrop" id="task-panel-container" style="height: 150px;">
+        
+
+                                 <div class="chip draggable" draggable="true" >
+                                <i class="fa-solid fa-circle" style="color: green;"></i>
+                                        task number 1                                    
+                                </div>
+                                <div class="chip draggable" draggable="true" >
+                                <i class="fa-solid fa-circle" style="color: green;"></i>
+                                        task number 1                                    
+                                </div>
+                                <div class="chip draggable" draggable="true" >
+                                <i class="fa-solid fa-circle" style="color: green;"></i>
+                                        task number 1                                    
+                                </div>
+                                <div class="chip draggable" draggable="true" >
+                                <i class="fa-solid fa-circle" style="color: green;"></i>
+                                        task number 1                                    
+                                </div>
+
+
+        
+                            
+
+                        </div>
+                        <div class="buttons-bottom-bar">
+                            {{{editIcon wc.user ../loggedUser wc._id ../line._id }}}
+                      </div>
+
+                  </div> 
+
+              {{/each}}
         </div>
-
-
-
-
     </main>
 
     <div id="title-bar">
                 {{!-- Title Bar --}}
-                <h3>{{this.title}}</h3>
+                <h3>{{line.title}}</h3>
                 <h6>in action since {{formatDate createdAt 'MMMM Do YYYY'}}</h6>
-                <h6>Site Created by {{../name}}</h6>              
-                <a href="/sites/{{../site._id}}">AT {{../site.title}} SITE</a>
+                <h6>Site Created by {{lineCreator.displayName}}</h6>              
+                <a href="/sites/{{site._id}}">AT {{site.title}} SITE</a>
                 <div class="chip">
-                      <img src="{{../img}}" alt="">
-                      welcome {{../name}}
+                      <img src="{{img}}" alt="">
+                      welcome {{name}}
                 </div>
 
 
       </div>
       <div id="control-bar">
         {{!-- {{CONTROL BAR}} --}}
-            <a href="/sites/{{../site._id}}/lines/{{this._id}}/upload"   ><i class="fa-solid fa-upload"></i> Upload <i class="fa-brands fa-youtube"></i> </a>    
-            <a href="/lines/{{this._id}}/wc/add"   ><i class="fa-solid fa-screwdriver"></i> create workcenter  </a>
+            <a href="/sites/{{site._id}}/lines/{{line._id}}/upload"   ><i class="fa-solid fa-upload"></i> Upload <i class="fa-brands fa-youtube"></i> </a>    
+            <a href="/lines/{{line._id}}/wc/add"   ><i class="fa-solid fa-screwdriver"></i> create workcenter  </a>
              <a href="#" class="btn">UPDATE LINE</a>
 
 
@@ -93,16 +99,12 @@
               <div id="graph-container" style="height: 600px;"></div>
       </div>
 
-  {{/each}}
-        <div id="bin">
-        {{!-- bin --}}        
 
-       
-                  <div class="containerWC" style="height: 200px; width:600px"></div>
+      <div id="bin">
+          {{!-- bin --}}        
+          <div class="containerWC" style="height: 200px; width:600px"></div>
+          </div>
       </div>
-
-
-</div>
 
 {{#section 'script'}}
     <script type="text/javascript" src="/scripts/drag-n-drop-line-workcenters.js"></script>
